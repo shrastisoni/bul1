@@ -1,16 +1,15 @@
-#!/usr/bin/env php
 <?php
 
 require __DIR__ . '/../lib/bootstrap.php';
 
-ini_set('xdebug.max_nesting_level', 3000);
+ini_set('xdebug.max_nesting_level', 2000);
 
 // Disable XDebug var_dump() output truncation
 ini_set('xdebug.var_display_max_children', -1);
 ini_set('xdebug.var_display_max_data', -1);
 ini_set('xdebug.var_display_max_depth', -1);
 
-list($operations, $files, $attributes) = parseArgs($argv);
+list($operations, $files) = parseArgs($argv);
 
 /* Dump nodes by default */
 if (empty($operations)) {
@@ -21,10 +20,7 @@ if (empty($files)) {
     showHelp("Must specify at least one file.");
 }
 
-$lexer = new PhpParser\Lexer\Emulative(array('usedAttributes' => array(
-    'startLine', 'endLine', 'startFilePos', 'endFilePos'
-)));
-$parser = new PhpParser\Parser($lexer);
+$parser = new PhpParser\Parser(new PhpParser\Lexer\Emulative);
 $dumper = new PhpParser\NodeDumper;
 $prettyPrinter = new PhpParser\PrettyPrinter\Standard;
 $serializer = new PhpParser\Serializer\XML;
@@ -48,17 +44,7 @@ foreach ($files as $file) {
     try {
         $stmts = $parser->parse($code);
     } catch (PhpParser\Error $e) {
-        if ($attributes['with-column-info'] && $e->hasColumnInfo()) {
-            $startLine = $e->getStartLine();
-            $endLine = $e->getEndLine();
-            $startColumn = $e->getStartColumn($code);
-            $endColumn   = $e->getEndColumn($code);
-            $message .= $e->getRawMessage() . " from $startLine:$startColumn to $endLine:$endColumn";
-        } else {
-            $message = $e->getMessage();
-        }
-
-        die($message . "\n");
+        die("==> Parse Error: {$e->getMessage()}\n");
     }
 
     foreach ($operations as $operation) {
@@ -94,12 +80,11 @@ The file arguments can also be replaced with a code string:
 
 Operations is a list of the following options (--dump by default):
 
-    --dump             -d  Dump nodes using NodeDumper
-    --pretty-print     -p  Pretty print file using PrettyPrinter\Standard
-    --serialize-xml        Serialize nodes using Serializer\XML
-    --var-dump             var_dump() nodes (for exact structure)
-    --resolve-names    -N  Resolve names using NodeVisitor\NameResolver
-    --with-column-info -c  Show column-numbers for errors (if available)
+    --dump           -d  Dump nodes using NodeDumper
+    --pretty-print   -p  Pretty print file using PrettyPrinter\Standard
+    --serialize-xml      Serialize nodes using Serializer\XML
+    --var-dump           var_dump() nodes (for exact structure)
+    --resolve-names  -N  Resolve names using NodeVisitor\NameResolver
 
 Example:
 
@@ -115,9 +100,6 @@ OUTPUT
 function parseArgs($args) {
     $operations = array();
     $files = array();
-    $attributes = array(
-        'with-column-info' => false,
-    );
 
     array_shift($args);
     $parseOptions = true;
@@ -146,10 +128,6 @@ function parseArgs($args) {
             case '-N';
                 $operations[] = 'resolve-names';
                 break;
-            case '--with-column-info':
-            case '-c';
-                $attributes['with-column-info'] = true;
-                break;
             case '--':
                 $parseOptions = false;
                 break;
@@ -162,5 +140,5 @@ function parseArgs($args) {
         }
     }
 
-    return array($operations, $files, $attributes);
+    return array($operations, $files);
 }

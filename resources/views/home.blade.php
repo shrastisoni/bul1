@@ -9,9 +9,9 @@
 
 				<div class="panel-body">
 					@if(Auth::check())
-					You are logged in!!
+					Hello {{Auth::user()->name}}
 					@else
-					You are not logged in!!
+					You are not logged in!
 					@endif
 				</div>
 			</div>

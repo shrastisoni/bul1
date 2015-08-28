@@ -1,5 +1,5 @@
 <?php namespace App\Services;
-
+use DB;
 use App\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
@@ -15,10 +15,10 @@ class Registrar implements RegistrarContract {
 	public function validator(array $data)
 	{
 		return Validator::make($data, [
-			'first_name' => 'required|max:255',
+			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
-			'phone_number' => 'numeric|regex:/[0-9]{10,11}/'
+			'role_id' => 'required|integer',
 		]);
 	}
 
@@ -31,13 +31,21 @@ class Registrar implements RegistrarContract {
 	public function create(array $data)
 	{
 		return User::create([
-			'first_name' => $data['first_name'],
-			'surname' => $data['surname'],
+			'name' => $data['name'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
-			'phone_number' => $data['phone_number'],
-			'role_id' => $data['role_id']
+			'role_id' => $data['role_id'],
 		]);
+	}
+	
+	/**
+	 * Get roles for an incoming registration request.
+	 *
+	 * @return roles sored in roles table
+	 */
+	public function getRoles()
+	{
+		return DB::table('roles')->get();
 	}
 
 }

@@ -10,14 +10,7 @@
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    
-    <!-- Scripts -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <link href="{{url('css/style.css')}}" rel="stylesheet" />
-    <link href="{{url('css/style-responsive.css')}}" rel="stylesheet" />
-    <link href="{{url('css/custom.css')}}" rel="stylesheet" />
-    <link href="{{url('css/style-metronic.css')}}" rel="stylesheet" />
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -35,13 +28,21 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				
+				<a class="navbar-brand" href="#">Laravel</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/home') }}">Home</a></li>
+					<li><a href="{{ url('/') }}">Home</a></li>
 				</ul>
+				@if(Auth::check())
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('user/'.Auth::user()->id) }}">My Account</a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('user/'.Auth::user()->id.'/edit') }}">Edit Account</a></li>
+				</ul>
+				@endif
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
@@ -49,7 +50,7 @@
 						<li><a href="{{ url('/auth/register') }}">Register</a></li>
 					@else
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->first_name }} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 							</ul>
@@ -62,6 +63,8 @@
 
 	@yield('content')
 
-	
+	<!-- Scripts -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

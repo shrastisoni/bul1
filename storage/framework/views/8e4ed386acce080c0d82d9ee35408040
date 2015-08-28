@@ -7,9 +7,10 @@
 
 				<div class="panel-body">
 					<?php if(Auth::check()): ?>
-					You are logged in!!
+					Hello <?php echo e(Auth::user()->name); ?>
+
 					<?php else: ?>
-					You are not logged in!!
+					You are not logged in!
 					<?php endif; ?>
 				</div>
 			</div>

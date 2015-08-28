@@ -1,5 +1,5 @@
-<?php namespace Illuminate\Foundation\Auth;
-
+<?php 
+namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
@@ -27,7 +27,8 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	public function getRegister()
 	{
-		return view('auth.register');
+		$roles = $this->registrar->getRoles();
+		return view('auth.register')->with('userRole', $roles);
 	}
 
 	/**

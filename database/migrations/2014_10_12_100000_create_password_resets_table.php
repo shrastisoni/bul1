@@ -27,6 +27,7 @@ class CreatePasswordResetsTable extends Migration {
 	 */
 	public function down()
 	{
+		//delete password_resets table
 		Schema::drop('password_resets');
 	}
 

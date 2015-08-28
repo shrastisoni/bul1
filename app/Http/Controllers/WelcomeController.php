@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
-use Auth;
+use DB;
+use App\Quotation;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -28,18 +30,8 @@ class WelcomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	 
-    //show login page
 	public function index()
 	{
 		return view('home');
 	}
-    
-    //show dashboard page
-     public function login()
-     {
-         
-        return view('auth.login');
-        
-     }
 }

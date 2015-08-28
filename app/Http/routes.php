@@ -10,12 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-//login page show
+
 Route::get('/', 'WelcomeController@index');
-
-//show home page after login
 Route::get('home', 'HomeController@index');
-
+Route::resource('user', 'UserController');
+Route::resource('question', 'QuestionController');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

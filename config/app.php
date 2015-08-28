@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://horsify',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => env('APP_KEY', 'SomeRandomString'),
+	'key' => env('APP_KEY', 'ZDnZvOy32TZhlXW9nrV1cHd2AMem0Oei'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -135,6 +135,8 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -192,6 +194,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'Form'      => 'Illuminate\Html\FormFacade',
+		'Html'      => 'Illuminate\Html\HtmlFacade',
 
 	],
 

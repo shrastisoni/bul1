@@ -2,7 +2,6 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Support\Facades\Redirect;
 
 class Authenticate {
 
@@ -41,8 +40,7 @@ class Authenticate {
 			}
 			else
 			{
-			    
-				return Redirect::to('auth/login');
+				return redirect()->guest('auth/login');
 			}
 		}
 

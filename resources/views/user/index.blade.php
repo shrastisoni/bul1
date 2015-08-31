@@ -1,39 +1,31 @@
 @extends('app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Profile</div>
+				<div class="panel-heading">All Users</div>
 				<div class="panel-body">
-					Hello {{Auth::user()->name}}
-					<div class="form-group">
-						<div class="col-md-4 control-label">Name</div>
-						<div class="col-md-6">
-							{{ Auth::user()->name }}
+					@if (count($errors) > 0)
+						<div class="alert alert-danger">
+							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
 						</div>
-					</div>
-					
-					<div class="form-group">
-						<div class="col-md-4 control-label">E-Mail</div>
-						<div class="col-md-6">
-							{{ Auth::user()->email }}
-						</div>
-					</div>
-					
-					<div class="form-group">
-	                    <div class="col-md-4 control-label">User Role</div>
-	                    <div class="col-md-6">
-	                        @if (isset($userRole) && !empty($userRole))
-	                            @foreach ($userRole as $role)
-	                                @if(Auth::user()->role_id == $role->role_id) 
-	                                	{{$role -> role_name}}
-	                                @endif
-	                            @endforeach
-	                        @endif
-	                    </div>
-	                </div>
+					@endif
+					@foreach($users as $user)
+					    <h3>{{ $user->name }}</h3>
+					    <p>{{ $user->email}}</p>
+					    <p>
+					        <a href="{{ route('user.show', $user->id) }}" class="btn btn-info">View User</a>
+					        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit User</a>
+					    </p>
+					    <hr>
+					@endforeach
 				</div>
 			</div>
 		</div>

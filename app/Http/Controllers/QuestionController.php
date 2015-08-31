@@ -107,7 +107,7 @@ class QuestionController extends Controller {
 	
 	    $question->fill($input)->save();
 	
-	    Session::flash('flash_message', 'Question successfully added!');
+	    Session::flash('flash_message', 'Question successfully updated!');
 	
 	    return redirect()->back();
 	}
@@ -121,7 +121,7 @@ class QuestionController extends Controller {
 	public function destroy($id)
 	{
 		//
-		$question = question::findOrFail($id);
+		$question = Question::findOrFail($id);
 
 	    $question->delete();
 	

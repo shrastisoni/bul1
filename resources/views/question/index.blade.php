@@ -21,8 +21,8 @@
 					    <h3>{{ $question->title }}</h3>
 					    <p>{{ $question->description}}</p>
 					    <p>
-					        <a href="{{ route('question.show', $question->id) }}" class="btn btn-info">View Task</a>
-					        <a href="{{ route('question.edit', $question->id) }}" class="btn btn-primary">Edit Task</a>
+					        <a href="{{ route('question.show', $question->id) }}" class="btn btn-info">View Question</a>
+					        <a href="{{ route('question.edit', $question->id) }}" class="btn btn-primary">Edit Question</a>
 					    </p>
 					    <hr>
 					@endforeach

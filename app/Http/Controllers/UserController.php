@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers;
-
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
+use Session;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
@@ -25,8 +27,9 @@ class UserController extends Controller {
 	 */
 	public function index()
 	{
-		//By defalult it will show User profile of Loggedin User
-		return User::all();
+		//all users
+		$users = User::all();
+    	return view('user.index')->withUsers($users);
 	}
 
 	/**
@@ -37,7 +40,8 @@ class UserController extends Controller {
 	public function create()
 	{
 		//able to create or return form to register
-		return array('requiredToCreate' => array('name', 'email', 'password', '_token'));
+		$roles = Role::all();
+		return view('user.create')->withRoles($roles);
 	}
 
 	/**
@@ -45,10 +49,19 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
 		//user data storing into database
-		return User::create(Input::all());
+		$this->validate($request, [
+		    'name' => 'required',
+		    'email' => 'required',
+		    'role_id' => 'required'
+		]);
+		//
+		$input = $request->all();
+	    User::create($input);
+		Session::flash('flash_message', 'User successfully added!');
+	    return redirect()->back();
 	}
 
 	/**
@@ -59,8 +72,9 @@ class UserController extends Controller {
 	 */
 	public function show($id)
 	{
-		//show user by id
-		return User::find($id);
+		//
+		$user = User::findOrFail($id);
+    	return view('user.show')->withUser($user);
 	}
 
 	/**
@@ -72,7 +86,9 @@ class UserController extends Controller {
 	public function edit($id)
 	{
 		//user is able to edit?
-		return User::find($id);
+		$user = User::findOrFail($id);
+		$roles = Role::all();
+    	return view('user.edit')->withUser($user)->withRoles($roles);
 	}
 
 	/**
@@ -81,9 +97,23 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Request $request)
 	{
-		return User::where('id', $id)->update(Input::all());
+		$user = User::findOrFail($id);
+
+	    $this->validate($request, [
+	        'name' => 'required',
+		    'email' => 'required',
+		    'role_id' => 'required'
+	    ]);
+	
+	    $input = $request->all();
+	
+	    $user->fill($input)->save();
+	
+	    Session::flash('flash_message', 'User successfully updated!');
+	
+	    return redirect()->back();
 	}
 
 	/**
@@ -95,7 +125,13 @@ class UserController extends Controller {
 	public function destroy($id)
 	{
 		//delete user
-		User::destroy($id);
+		$user = User::findOrFail($id);
+
+	    $user->delete();
+	
+	    Session::flash('flash_message', 'User successfully deleted!');
+	
+	    return redirect()->route('user.index');
 	}
 
 }

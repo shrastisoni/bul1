@@ -37,10 +37,10 @@
 				</ul>
 				@if(Auth::check())
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('user/'.Auth::user()->id) }}">My Account</a></li>
+					<li><a href="{{ route('user.index') }}">Users</a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('user/'.Auth::user()->id.'/edit') }}">Edit Account</a></li>
+					<li><a href="{{ route('question.index') }}">Questions</a></li>
 				</ul>
 				@endif
 

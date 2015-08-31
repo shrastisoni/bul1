@@ -10,7 +10,7 @@
 				        {{ Session::get('flash_message') }}
 				    </div>
 				@endif
-				<div class="panel-heading">Edit User Account</div>
+				<div class="panel-heading">Edit Question</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">

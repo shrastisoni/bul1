@@ -14,6 +14,7 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('home', 'HomeController@index');
 Route::resource('user', 'UserController');
+Route::resource('business', 'BusinessController');
 Route::resource('question', 'QuestionController');
 Route::controllers([
 	'auth' => 'Auth\AuthController',

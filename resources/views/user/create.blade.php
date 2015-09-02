@@ -18,7 +18,7 @@
 						</div>
 					@endif
 					{!! Form::open([
-					    'route' => 'user.store'
+					    'route' => 'users.store'
 					]) !!}
 					{!! Form::token() !!}
 					<div class="form-group">

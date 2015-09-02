@@ -24,7 +24,7 @@
 					@endif
 					{!! Form::model($question, [
 					    'method' => 'PATCH',
-					    'route' => ['question.update', $question->id]
+					    'route' => ['questions.update', $question->id]
 					]) !!}
 					{!! Form::token() !!}
 					<div class="form-group">

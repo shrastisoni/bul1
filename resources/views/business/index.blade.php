@@ -1,23 +1,45 @@
 @extends('app')
 
 @section('content')
+
 <div class="row content" >
-	<h2 class="content-heading"><img src="/images/icons/album-2.png" class="icon">Business</h2>
-	@foreach($businesses as $b)
-		<div class="col-md-4 album">
-			<a href="/business/{{$b->id}}">
-			<figure>
-				<img src="{{$b->profilePhotoPath}}" class="gallery-thumbnail">
-			</figure>
-				<div class="col-lg-9">
-					<span class="photo-album">{{$b->name}}</span>
-					<span class="photo-counter"><strong>Website:</strong> {{$b->website}}</span>
+	<div class="col-md-12">
+		<h2 class="content-heading"><img src="/images/icons/social-circle.png" class="icon connections">Business Accounts</h2>
+		<div class="photo-selection">
+			@foreach($businesses as $b)
+			<div class="col-md-3">
+				<a href="{{route('businesses.show', $b->id)}}">
+				<figure>
+					<img src="{{$b->profilePhotoPath}}" class="gallery-thumbnail" />
+					<figcaption>
+						<table class="follow-overlay">
+							<tr>
+								<td>
+								<div class="follow-events">
+									<a href="#" class="no-color"><span><img src="/images/icons/chat.png" class="icon"></span>Message</a>
+									<br>
+									<a href="#" class="no-color"><span><img src="/images/icons/file.png" class="icon"></span>View Profile</a>
+									<br>
+									<a href="#" class="no-color"><span><img src="/images/icons/unfollow.png" class="icon"></span>Unfollow</a>
+								</div></td>
+							</tr>
+						</table>
+					</figcaption>
+				</figure>
+				<div class="photo-description">
+					<div class="col-lg-9">
+						<span class="business-name">{{$b->name}}</span>
+						<span class="business-type">{{$b->type}}</span>
+					</div>
+					<div class="col-lg-3 go">
+						<a href="#"> </a>
+					</div>
 				</div>
-				<div class="col-lg-3 go">
-				</div>
-			</a>
+				</a>
+			</div>
+			@endforeach
 		</div>
-	@endforeach
-	<div class="clearfix spacer"></div>
+		<div class="clearfix spacer"></div>
+	</div>
 </div>
 @endsection

@@ -51,6 +51,18 @@ class BusinessController extends Controller {
 		$business = Business::findOrFail($id);
     	return view('business.show')->withBusiness($business);
 	}
+	
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function getPhotos($id)
+	{
+		//
+    	echo "photos".$id;
+	}
 
 	/**
 	 * Show the form for editing the specified resource.

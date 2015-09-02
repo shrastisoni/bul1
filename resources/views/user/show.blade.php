@@ -21,14 +21,14 @@
 					<p class="lead">{{ $user->email }}</p>
 					<p class="lead">{{ $user->role_id }}</p>
 					<hr>
-					<a href="{{ route('user.index') }}" class="btn btn-info">Back to all User</a>
-					<a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit User</a>
+					<a href="{{ route('users.index') }}" class="btn btn-info">Back to all User</a>
+					<a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit User</a>
 					
 					<div class="pull-right">
 						<div class="col-md-6 text-right">
 					        {!! Form::open([
 					            'method' => 'DELETE',
-					            'route' => ['user.destroy', $user->id]
+					            'route' => ['users.destroy', $user->id]
 					        ]) !!}
 					            {!! Form::submit('Delete this User?', ['class' => 'btn btn-danger']) !!}
 					        {!! Form::close() !!}

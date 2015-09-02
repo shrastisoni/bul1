@@ -20,14 +20,14 @@
 					<h1>{{ $question->title }}</h1>
 					<p class="lead">{{ $question->description }}</p>
 					<hr>
-					<a href="{{ route('question.index') }}" class="btn btn-info">Back to all questions</a>
-					<a href="{{ route('question.edit', $question->id) }}" class="btn btn-primary">Edit Question</a>
+					<a href="{{ route('questions.index') }}" class="btn btn-info">Back to all Questions</a>
+					<a href="{{ route('questions.edit', $question->id) }}" class="btn btn-primary">Edit Question</a>
 					
 					<div class="pull-right">
 						<div class="col-md-6 text-right">
 					        {!! Form::open([
 					            'method' => 'DELETE',
-					            'route' => ['question.destroy', $question->id]
+					            'route' => ['questions.destroy', $question->id]
 					        ]) !!}
 					            {!! Form::submit('Delete this Question?', ['class' => 'btn btn-danger']) !!}
 					        {!! Form::close() !!}

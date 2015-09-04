@@ -8,7 +8,7 @@
 		<div class="photo-selection">
 			@foreach($businesses as $b)
 			<div class="col-md-3">
-				<a href="{{route('businesses.show', $b->id)}}">
+				<a href="{{route('business.show', $b->userId)}}">
 				<figure>
 					<img src="{{$b->profilePhotoPath}}" class="gallery-thumbnail" />
 					<figcaption>

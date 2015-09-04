@@ -22,10 +22,10 @@
 	<div class="container">
 		<ul class="nav navbar-nav">
 			<li>
-				<a href="{{route('businesses.show', $business->id)}}" class="active">Profile</a>
+				<a href="{{route('business.show', $business->id)}}" class="active">Profile</a>
 			</li>
 			<li>
-				<a href="#">Photos</a>
+				<a href="{{route('photos.show', $business->id)}}">Photos</a>
 			</li>
 			<li>
 				<a href="#">Connections</a>

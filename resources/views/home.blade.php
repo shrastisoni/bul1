@@ -5,13 +5,13 @@
 	<div class="container">
 		<ul class="nav navbar-nav">
 			<li>
-				<a href="{{route('businesses.index')}}">Businesses</a>
+				<a href="{{route('business.index')}}">Businesses</a>
 			</li>
 			<li>
 				<a href="#">Photos</a>
 			</li>
 			<li>
-				<a href="{{route('users.index')}}">Users</a>
+				<a href="{{route('user.index')}}">Users</a>
 			</li>
 			<li>
 				<a href="{{route('questions.index')}}">Queries</a>

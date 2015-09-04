@@ -1,8 +1,9 @@
 <?php namespace App\Http\Controllers;
-
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\PhotoAlbum;
+use App\Business;
 use Illuminate\Http\Request;
 
 class PhotoAlbumController extends Controller {
@@ -15,6 +16,11 @@ class PhotoAlbumController extends Controller {
 	public function index()
 	{
 		//
+		if(Auth::check()) 
+		{
+			echo "Show photos of loggedin users album page.";
+		}
+		return redirect('businesses');
 	}
 
 	/**
@@ -46,6 +52,9 @@ class PhotoAlbumController extends Controller {
 	public function show($id)
 	{
 		//
+		$photoAlbum = PhotoAlbum::where('userId', $id)->get();
+		$business = Business::findOrFail($id);
+    	return view('photoAlbum.show')->withPhotoAlbum($photoAlbum)->withBusiness($business);
 	}
 
 	/**

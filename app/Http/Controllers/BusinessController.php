@@ -1,8 +1,8 @@
 <?php namespace App\Http\Controllers;
 use App\Business;
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller {
@@ -15,8 +15,12 @@ class BusinessController extends Controller {
 	public function index()
 	{
 		//
-		$businesses = Business::all();
-    	return view('business.index')->withBusinesses($businesses);
+		if(Auth::check())
+		{
+			$business = Business::findOrFail(Auth::User()->business->id);
+	    	return view('business.show')->withBusiness($business);
+		}
+    	return redirect('businesses');
 	}
 
 	/**
@@ -50,6 +54,19 @@ class BusinessController extends Controller {
 		//
 		$business = Business::findOrFail($id);
     	return view('business.show')->withBusiness($business);
+	}
+	
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function showAll()
+	{
+		//
+		$businesses = Business::all();
+    	return view('business.index')->withBusinesses($businesses);
 	}
 	
 	/**

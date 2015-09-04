@@ -13,9 +13,10 @@
 
 Route::get('/', 'WelcomeController@index');
 Route::get('home', 'HomeController@index');
-Route::resource('users', 'UserController');
-Route::get('businesses/photos/{$id}', 'BusinessController@getPhotos');
-Route::resource('businesses', 'BusinessController');
+Route::resource('user', 'UserController');
+Route::resource('business', 'BusinessController');
+Route::get('businesses', 'BusinessController@showAll');
+Route::resource('photos', 'PhotoAlbumController');
 Route::resource('questions', 'QuestionController');
 Route::controllers([
 	'auth' => 'Auth\AuthController',

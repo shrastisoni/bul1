@@ -15,14 +15,16 @@ class CreatePhotoAlbumsTable extends Migration {
 		Schema::create('photoAlbums', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('userId');
-			$table->integer('businessId');
-			$table->string('albumId', 200);
-			$table->string('albumName', 200);
-			$table->string('photoName', 200);
-			$table->string('photoPath', 200);
+			$table->integer('userId')->unsigned();
+			$table->foreign('userId')->references('id')->on('users');
+			$table->string('type', 200);
+			$table->string('name', 200);
+			$table->string('path', 200);
+			$table->integer('linkWith'); //if type 'album' then 'link with n photos' else if type is 'photo' then link with album id n
 			$table->boolean('active');
-			$table->string('alterText', 200);
+			$table->string('about', 500);
+			$table->integer('epochCreatedAt');
+			$table->integer('epochUpdatedAt');
 			$table->timestamps();
 		});
 	}

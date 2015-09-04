@@ -15,7 +15,8 @@ class CreateBusinessesTable extends Migration {
 		Schema::create('businesses', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('userId');
+			$table->integer('userId')->unsigned();
+			$table->foreign('userId')->references('id')->on('users');
 			$table->string('name', 200);
 			$table->string('email', 200);
 			$table->string('membershipLevel', 200);

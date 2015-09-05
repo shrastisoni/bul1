@@ -16,7 +16,8 @@ class CreateFollowsTable extends Migration {
 		Schema::create('follows', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('byUserId');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('toType', 50);
 			$table->integer('typeId');
 			$table->boolean('permit');

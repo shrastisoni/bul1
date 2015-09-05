@@ -15,8 +15,8 @@ class CreatePhotoAlbumsTable extends Migration {
 		Schema::create('photoAlbums', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('userId')->unsigned();
-			$table->foreign('userId')->references('id')->on('users');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('type', 200);
 			$table->string('name', 200);
 			$table->string('path', 200);

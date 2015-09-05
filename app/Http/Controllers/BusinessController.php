@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use App\Business;
+use App\User;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,7 @@ class BusinessController extends Controller {
 		//
 		if(Auth::check())
 		{
-			$business = Business::findOrFail(Auth::User()->business->id);
+			$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
 	    	return view('business.show')->withBusiness($business);
 		}
     	return redirect('businesses');

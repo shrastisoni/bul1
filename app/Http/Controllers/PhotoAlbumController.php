@@ -3,6 +3,7 @@ use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\PhotoAlbum;
+use App\User;
 use App\Business;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,11 @@ class PhotoAlbumController extends Controller {
 	public function index()
 	{
 		//
-		if(Auth::check()) 
+		if(Auth::check())
 		{
-			echo "Show photos of loggedin users album page.";
+			$albums = PhotoAlbum::where('user_id', Auth::user()->id)->where('type', 'album')->get();
+			$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+	    	return view('photoAlbum.show')->withAlbums($albums)->withBusiness($business);
 		}
 		return redirect('businesses');
 	}
@@ -52,9 +55,9 @@ class PhotoAlbumController extends Controller {
 	public function show($id)
 	{
 		//
-		$photoAlbum = PhotoAlbum::where('userId', $id)->get();
+		$albums = PhotoAlbum::where('user_id', $id)->where('type', 'album')->get();
 		$business = Business::findOrFail($id);
-    	return view('photoAlbum.show')->withPhotoAlbum($photoAlbum)->withBusiness($business);
+    	return view('photoAlbum.show')->withAlbums($albums)->withBusiness($business);
 	}
 
 	/**

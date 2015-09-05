@@ -5,10 +5,10 @@
 	<div class="container">
 		<ul class="nav navbar-nav">
 			<li>
-				<a href="{{route('business.index')}}">Businesses</a>
+				<a href="/businesses">Businesses</a>
 			</li>
 			<li>
-				<a href="#">Photos</a>
+				<a href="/photos">Photos</a>
 			</li>
 			<li>
 				<a href="{{route('user.index')}}">Users</a>

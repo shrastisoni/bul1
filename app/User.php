@@ -1,5 +1,5 @@
 <?php namespace App;
-
+use App\Busines;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -33,12 +33,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	
 	public function business()
 	{
-		return $this->hasOne('Business');
+		return $this->hasOne('App\Business');
 	}
 	
 	public function photoAlbum()
 	{
-		return $this->hasMany('PhotoAlbum');
+		return $this->hasMany('App\PhotoAlbum');
 	}
-
+	
+	public function follow()
+	{
+		return $this->hasMany('App\Follow');
+	}
 }

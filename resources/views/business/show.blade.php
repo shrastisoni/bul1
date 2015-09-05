@@ -11,7 +11,7 @@
 			<h4 class="company-type">Business Type: {{$business->type}}</h4>
 			<button type="button" class="btn btn-default green"><img src="/images/icons/chat.png" class="icon">Contact us
 			</button>
-			<button type="button" class="btn btn-default blue"><img src="/images/icons/double-right-arrow.png" class="icon">Follow
+			<button onclick="followIt('business', {{$business->id}})" type="button" class="btn btn-default blue"><img src="/images/icons/double-right-arrow.png" class="icon">Follow
 			</button>
 		</div>
 	</div>

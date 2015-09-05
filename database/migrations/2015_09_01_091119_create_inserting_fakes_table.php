@@ -44,7 +44,7 @@ class CreateInsertingFakesTable extends Migration {
 			);
 		DB::table('businesses')->insert(
     			[
-    			'userId' => 1, 
+    			'user_id' => 1, 
     			'name' => 'Business 1',
     			'email' => 'email1@horsify.com',
     			'membershipLevel' => 'Level 1',
@@ -65,7 +65,7 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('businesses')->insert(
     			[
-    			'userId' => 2, 
+    			'user_id' => 2, 
     			'name' => 'Business 2',
     			'email' => 'email2@horsify.com',
     			'membershipLevel' => 'Level 2',
@@ -86,7 +86,7 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('businesses')->insert(
     			[
-    			'userId' => 3, 
+    			'user_id' => 3, 
     			'name' => 'Business 3',
     			'email' => 'email3@horsify.com',
     			'membershipLevel' => 'Level 3',
@@ -107,10 +107,10 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('photoAlbums')->insert(
     			[
-    			'userId' => 1, 
+    			'user_id' => 1, 
     			'type' => 'album',
     			'name' => 'Album 1',
-    			'path' => '/images/bg.jpg',
+    			'path' => '/images/photos-1.png',
     			'active' => TRUE,
     			'linkWith' => 2,
     			'about' => 'Horse Trading & Farming 1',
@@ -120,10 +120,10 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('photoAlbums')->insert(
     			[
-    			'userId' => 1, 
+    			'user_id' => 1, 
     			'type' => 'album',
     			'name' => 'Album 2',
-    			'path' => '/images/bg.jpg',
+    			'path' => '/images/photos-2.png',
     			'active' => TRUE,
     			'linkWith' => 0,
     			'about' => 'Horse Trading & Farming 2',
@@ -133,10 +133,10 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('photoAlbums')->insert(
     			[
-    			'userId' => 1, 
+    			'user_id' => 1, 
     			'type' => 'album',
     			'name' => 'Album 3',
-    			'path' => '/images/bg.jpg',
+    			'path' => '/images/photos-3.png',
     			'active' => TRUE,
     			'linkWith' => 1,
     			'about' => 'Horse Trading & Farming 3',
@@ -146,7 +146,7 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('photoAlbums')->insert(
     			[
-    			'userId' => 1, 
+    			'user_id' => 1, 
     			'type' => 'photo',
     			'name' => 'Photo 1',
     			'path' => '/images/bg.jpg',
@@ -159,7 +159,7 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('photoAlbums')->insert(
     			[
-    			'userId' => 1, 
+    			'user_id' => 1, 
     			'type' => 'photo',
     			'name' => 'Photo 2',
     			'path' => '/images/bg.jpg',
@@ -172,7 +172,7 @@ class CreateInsertingFakesTable extends Migration {
 			);
 			DB::table('photoAlbums')->insert(
     			[
-    			'userId' => 1, 
+    			'user_id' => 1, 
     			'type' => 'photo',
     			'name' => 'Photo 3',
     			'path' => '/images/bg.jpg',

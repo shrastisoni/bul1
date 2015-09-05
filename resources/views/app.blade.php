@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="author" content="">
 		<title>Horsify | Home</title>
 
@@ -55,10 +56,10 @@
 							<a href="search.html"><i class="fa fa-search"></i></a>
 						</li>
 						<li>
-							<a href="#">Log in</a>
+							<a href="/auth/login">Log in</a>
 						</li>
 						<li>
-							<a href="#">Join now</a>
+							<a href="/auth/register">Join now</a>
 						</li>
 					</ul>
 				</div>
@@ -70,7 +71,9 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 						<ul class="nav navbar-nav navbar-right">
 							<?php $UrlPath = '/'; ?>
+							@if($sections[0] != 'home')
 							<a href="/" class="active">Home</a>
+							@endif
 							@foreach($sections as $section)
 							@if($section && (strpos($section,'{') === false))
 								<?php
@@ -81,6 +84,9 @@
 	 							?>
 							<a href="{{$UrlPath}}" class="active">{{ucfirst($section)}}</a>
 							@else
+							@if(isset($business))
+							<a href="{{$business->id}}" class="active">{{ucfirst($business->name)}}</a>
+							@endif
 								<?php 
 									$UrlPath = '#'; 
 								?>
@@ -134,5 +140,8 @@
 
 		<!-- Script for lightbox gallery -->
 		<script type="text/javascript" src="/fresco/fresco.js"></script>
+		
+		<!-- Script for custom functions -->
+		<script type="text/javascript" src="/js/functions.js"></script>
 	</body>
 </html>

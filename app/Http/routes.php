@@ -13,6 +13,7 @@
 
 Route::get('/', 'WelcomeController@index');
 Route::get('home', 'HomeController@index');
+Route::post('follow', 'FollowController@followIt');
 Route::resource('user', 'UserController');
 Route::resource('business', 'BusinessController');
 Route::get('businesses', 'BusinessController@showAll');

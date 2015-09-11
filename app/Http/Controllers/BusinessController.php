@@ -1,118 +1,97 @@
 <?php namespace App\Http\Controllers;
 use App\Business;
+use App\PhotoAlbum;
 use App\User;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BusinessController extends Controller {
+class BusinessController extends Controller 
+{
 
 	/**
-	 * Display a listing of the resource.
+	 * Show the application dashboard to the user.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
-		if(Auth::check())
-		{
-			$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
-	    	return view('business.show')->withBusiness($business);
-		}
-    	return redirect('businesses');
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-		$business = Business::findOrFail($id);
-    	return view('business.show')->withBusiness($business);
+		return view('home');
 	}
 	
 	/**
-	 * Display the specified resource.
+	 * Display a loggedin user's business profile.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function showAll()
+	public function profile($id)
 	{
-		//
-		$businesses = Business::all();
-    	return view('business.index')->withBusinesses($businesses);
+		//all users
+		$business = Business::findOrFail(User::find($id)->business->id);
+    	return view('business.profile')->withBusiness($business);
 	}
 	
 	/**
-	 * Display the specified resource.
+	 * Display a loggedin user's business albums.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function getPhotos($id)
+	public function photos($id)
 	{
-		//
-    	echo "photos".$id;
+		//all users
+		$business = Business::findOrFail(User::find($id)->business->id);
+		$albums = PhotoAlbum::where('user_id', $id)->where('type', 'album')->get();
+    	return view('business.photos')->withBusiness($business)->withAlbums($albums);
 	}
-
+	
 	/**
-	 * Show the form for editing the specified resource.
+	 * Display a loggedin user's business connections.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function connections($id)
 	{
-		//
+		//all users
+		$business = Business::findOrFail(User::find($id)->business->id);
+    	return view('business.connections')->withBusiness($business);
 	}
-
+	
 	/**
-	 * Update the specified resource in storage.
+	 * Display a loggedin user's business reviews.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function reviews($id)
 	{
-		//
+		//all users
+		$business = Business::findOrFail(User::find($id)->business->id);
+    	return view('business.reviews')->withBusiness($business);
 	}
-
+	
 	/**
-	 * Remove the specified resource from storage.
+	 * Display a loggedin user's business messages.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function messages($id)
 	{
-		//
+		//all users
+		$business = Business::findOrFail(User::find($id)->business->id);
+    	return view('business.messages')->withBusiness($business);
+	}
+	
+	
+	/**
+	 * Display a loggedin user's business ourFeeds.
+	 *
+	 * @return Response
+	 */
+	public function ourFeed($id)
+	{
+		//all users
+		$business = Business::findOrFail(User::find($id)->business->id);
+    	return view('business.our-feed')->withBusiness($business);
 	}
 
 }

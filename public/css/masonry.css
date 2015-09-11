@@ -1,0 +1,104 @@
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+.masonry-row {
+ -moz-column-width: 14.063em;
+ -webkit-column-width: 14.063em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap:1em; 
+  
+}
+
+.item {
+ display: inline-block;
+ padding: 0px;
+ width:  100%; 
+}
+
+.well {
+ position:relative;
+ display: block;
+ margin-bottom: 15px;
+ padding: 0;
+     
+ border-radius: 5px;
+    overflow: visible;
+ background-color: #fdfdfd;
+ border-color: #e7e7e7;
+ box-shadow: none;
+}
+.feed-gallery {
+    border-radius: 5px;
+}
+.feed-gallery-img img {
+    width: 100%;
+    border-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;	
+}
+.feed-gallery-meta {
+    padding: 20px;
+	border-top: 1px solid #e7e7e7;
+}
+
+.feed-gallery-meta span {
+    font-size: 13px;
+    display: block;
+    color: #828c91;
+}
+
+span.feed-comment-timestamp {
+    font-weight: 400;
+    color: #ccc;
+}
+span.feed-commentor {
+    margin-top: 5px;
+    font-weight: 400;
+    color: #3f535c;
+}
+
+img.feed-business-name, img.feed-individual-name {
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+    margin-right: 3px;
+	max-height: 38px;
+	max-width: 38px;
+}
+img.feed-individual-name {
+    border-color: #e9e9e9;
+    border-radius: 50%;
+}
+.feed-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(63,83,92,0.25);
+    border-radius: 5px;
+}
+
+.feed-gallery-img {
+    position: relative;
+}
+.feed-like a {
+    display: inline-block;
+    width: 17px;
+    height: 16px;
+    background: url("../images/icons/feed-unlike.png") no-repeat;
+}
+.feed-like a:hover {
+	background-image: url(../images/icons/feed-like.png);
+}
+
+.feed-like {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    z-index: 1;
+    font-weight: 400;
+    font-size: 11px;
+    color: #fff;
+}
+span.feed-number-of-likes {
+    vertical-align: top;
+}

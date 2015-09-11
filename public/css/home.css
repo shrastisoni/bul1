@@ -1,0 +1,222 @@
+.intro {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: table;
+  text-align: center;
+}
+
+.intro-text {
+  display: table-cell;
+  background-size: cover;
+}
+
+#home .top-container {
+    background-color: transparent;
+}
+#home .account .nav a {
+    color: #fff;
+}
+#home .home-search {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -495px;
+    margin-top: -71px;
+}
+
+#home #search-form h1 {
+	text-transform: uppercase;
+	text-shadow: 0 1px 0px rgba(0,0,0,0.75);
+	font-weight: 400;
+    font-size: 48px;
+	color: #fff;
+}
+.feed-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(63,83,92,0.25);
+    border-radius: 5px;
+	z-index: 0;
+}
+#home nav.navbar.top, #home .home-search, #home .scroll-down {
+    z-index: 1;
+}
+.scroll-down {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    margin-left: -65px;
+    color: #fff;
+    font-weight: 400;
+}
+.scroll-down a:hover {
+	color: inherit;
+}
+.scroll-down span {
+    height: 28px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+/********** Scroll Animation ************/
+
+.mouse
+{
+	height: 21px;
+    width: 14px;
+    border-radius: 10px;
+    transform: none;
+    border: 2px solid white;
+    top: 170px;
+    display: inline-block;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;}
+
+.wheel
+{
+  height: 5px;
+  width: 2px;
+  display: block;
+  margin: 5px auto;
+  background: white;
+  position: relative;
+}
+
+.wheel
+{
+  -webkit-animation: mouse-wheel 1.2s ease infinite;
+  -moz-animation: mouse-wheel 1.2s ease infinite;
+}
+
+@-webkit-keyframes mouse-wheel
+{
+   0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(6px);
+    -ms-transform: translateY(6px);
+    transform: translateY(6px);
+  }
+}
+
+@-moz-keyframes mouse-wheel
+{
+  0% { top: 1px; }
+  50% { top: 2px; }
+  100% { top: 3px;}
+}
+
+@-webkit-keyframes mouse-scroll {
+
+  0%   { opacity: 0;}
+  50%  { opacity: .5;}
+  100% { opacity: 1;}
+}
+@-moz-keyframes mouse-scroll {
+
+  0%   { opacity: 0; }
+  50%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+@-o-keyframes mouse-scroll {
+
+  0%   { opacity: 0; }
+  50%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+@keyframes mouse-scroll {
+
+  0%   { opacity: 0; }
+  50%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+/********* End Scroll *******/
+.home-social {
+    margin-top: 40px;
+    height: 200px;
+    background: url(../images/home-social.png) no-repeat rgb(38, 138, 213);
+	background-position: 0 50%;
+}
+.home-social span {
+    display: inline-block;
+    margin: 0 20px;
+}
+.social-connections {
+    width: 248px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.social-connections h3 {
+    line-height: 60px;
+}
+.featured {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.featured h3 {
+	color: #3f535c;
+	font-weight: 300;
+}
+.home-featured {
+    max-height: 200px;
+    overflow: hidden;
+    margin: 20px auto;
+	position: relative;
+}
+.home-featured img {
+    border: 1px solid #eaeaea;
+    width: 100%;
+    border-radius: 5px;
+}
+.latest-forum .feed-overlay {
+    background-color: transparent;
+    color: #fff;
+    padding: 20px;
+}
+.feed-overlay {
+    color: #fff;
+    padding: 20px;
+}
+span.post-title {
+    font-size: 20px;
+    display: block;
+}
+span.post-meta {
+    position: absolute;
+    bottom: 18px;
+}
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}

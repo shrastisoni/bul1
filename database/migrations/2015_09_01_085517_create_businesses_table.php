@@ -18,7 +18,10 @@ class CreateBusinessesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('name', 200);
+			$table->string('uName', 250);
+			$table->unique('uName');
 			$table->string('email', 200);
+			$table->unique('email');
 			$table->string('membershipLevel', 200);
 			$table->string('type', 200);
 			$table->string('location', 200);

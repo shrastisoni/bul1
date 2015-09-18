@@ -17,7 +17,7 @@
 								<div class="follow-events">
 									<a href="#" class="no-color"><span><img src="/images/icons/chat.png" class="icon"></span>Message</a>
 									<br>
-									<a href="{{route('business.show', $b->id)}}" class="no-color"><span><img src="/images/icons/file.png" class="icon"></span>View Profile</a>
+									<a href="business/{{$b->uName}}/profile" class="no-color"><span><img src="/images/icons/file.png" class="icon"></span>View Profile</a>
 									<br>
 									<a onclick="followIt('business', {{$b->id}})" class="no-color"><span><img src="/images/icons/unfollow.png" class="icon"></span>Unfollow</a>
 								</div></td>

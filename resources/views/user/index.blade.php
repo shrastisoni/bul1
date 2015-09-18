@@ -21,7 +21,7 @@
 					    <h3>{{ $user->name }}</h3>
 					    <p>{{ $user->email}}</p>
 					    <p>
-					        <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">View User</a>
+					        <a href="user/{{$user->uName}}/profile" class="btn btn-info">View User</a>
 					        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit User</a>
 					    </p>
 					    <hr>

@@ -15,6 +15,7 @@ class CreateInsertingFakesTable extends Migration {
 		DB::table('users')->insert(
     			[
     			'name' => 'User 1',
+    			'uName' => 'User-1',
     			'email' => 'useremail1@horsify.com',
     			'password' => bcrypt('password'),
     			'role_id' => '1',
@@ -25,6 +26,7 @@ class CreateInsertingFakesTable extends Migration {
 			DB::table('users')->insert(
     			[
     			'name' => 'User 2',
+    			'uName' => 'User-2',
     			'email' => 'useremail2@horsify.com',
     			'password' => bcrypt('password'),
     			'role_id' => '1',
@@ -35,6 +37,7 @@ class CreateInsertingFakesTable extends Migration {
 			DB::table('users')->insert(
     			[
     			'name' => 'User 3',
+    			'uName' => 'User-3',
     			'email' => 'useremail3@horsify.com',
     			'password' => bcrypt('password'),
     			'role_id' => '1',
@@ -46,6 +49,7 @@ class CreateInsertingFakesTable extends Migration {
     			[
     			'user_id' => 1, 
     			'name' => 'Business 1',
+    			'uName' => 'Business-1',
     			'email' => 'email1@horsify.com',
     			'membershipLevel' => 'Level 1',
     			'type' => 'Horse Trading & Farming',
@@ -57,7 +61,7 @@ class CreateInsertingFakesTable extends Migration {
     			'coverPhotoPath' => '/images/bg.jpg',
     			'followersCount' => 7,
     			'reviewsCount' => 4,
-    			'rating' => 4.5,
+    			'rating' => 3.5,
     			'aboutUs' => 'Hey here we are talking about that what is business 1 is actually doing',
     			'epochCreatedAt' => time(),
     			'epochUpdatedAt' => time()
@@ -67,6 +71,7 @@ class CreateInsertingFakesTable extends Migration {
     			[
     			'user_id' => 2, 
     			'name' => 'Business 2',
+    			'uName' => 'Business-2',
     			'email' => 'email2@horsify.com',
     			'membershipLevel' => 'Level 2',
     			'type' => 'Horse Trading & Farming',
@@ -88,6 +93,7 @@ class CreateInsertingFakesTable extends Migration {
     			[
     			'user_id' => 3, 
     			'name' => 'Business 3',
+    			'uName' => 'Business-3',
     			'email' => 'email3@horsify.com',
     			'membershipLevel' => 'Level 3',
     			'type' => 'Horse Trading & Farming',
@@ -99,7 +105,7 @@ class CreateInsertingFakesTable extends Migration {
     			'coverPhotoPath' => '/images/photos-3.png',
     			'followersCount' => 5,
     			'reviewsCount' => 6,
-    			'rating' => 4.5,
+    			'rating' => 2.5,
     			'aboutUs' => 'Hey here we are talking about that what is business 3 is actually doing',
     			'epochCreatedAt' => time(),
     			'epochUpdatedAt' => time()

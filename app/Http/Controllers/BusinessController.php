@@ -15,9 +15,10 @@ class BusinessController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function search()
 	{
-		return view('home');
+		$businesses = Business::all();
+		return view('business.search')->withBusinesses($businesses);
 	}
 	
 	/**
@@ -28,7 +29,7 @@ class BusinessController extends Controller
 	public function profile($id)
 	{
 		//all users
-		$business = Business::findOrFail(User::find($id)->business->id);
+		$business = Business::where('uName', $id)->first();
     	return view('business.profile')->withBusiness($business);
 	}
 	
@@ -40,8 +41,8 @@ class BusinessController extends Controller
 	public function photos($id)
 	{
 		//all users
-		$business = Business::findOrFail(User::find($id)->business->id);
-		$albums = PhotoAlbum::where('user_id', $id)->where('type', 'album')->get();
+		$business = Business::where('uName', $id)->first();
+		$albums = PhotoAlbum::where('user_id', $business->user_id)->where('type', 'album')->get();
     	return view('business.photos')->withBusiness($business)->withAlbums($albums);
 	}
 	
@@ -53,7 +54,7 @@ class BusinessController extends Controller
 	public function connections($id)
 	{
 		//all users
-		$business = Business::findOrFail(User::find($id)->business->id);
+		$business = Business::where('uName', $id)->first();
     	return view('business.connections')->withBusiness($business);
 	}
 	
@@ -65,7 +66,7 @@ class BusinessController extends Controller
 	public function reviews($id)
 	{
 		//all users
-		$business = Business::findOrFail(User::find($id)->business->id);
+		$business = Business::where('uName', $id)->first();
     	return view('business.reviews')->withBusiness($business);
 	}
 	
@@ -77,7 +78,7 @@ class BusinessController extends Controller
 	public function messages($id)
 	{
 		//all users
-		$business = Business::findOrFail(User::find($id)->business->id);
+		$business = Business::where('uName', $id)->first();
     	return view('business.messages')->withBusiness($business);
 	}
 	
@@ -90,7 +91,7 @@ class BusinessController extends Controller
 	public function ourFeed($id)
 	{
 		//all users
-		$business = Business::findOrFail(User::find($id)->business->id);
+		$business = Business::where('uName', $id)->first();
     	return view('business.our-feed')->withBusiness($business);
 	}
 

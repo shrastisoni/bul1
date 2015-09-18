@@ -13,6 +13,7 @@
 
 Route::get('/', 'WelcomeController@index');
 Route::get('home', 'HomeController@index');
+Route::get('search', 'BusinessController@search');
 Route::post('follow', 'FollowController@followIt');
 Route::resource('users', 'UserController');
 Route::resource('questions', 'QuestionController');
@@ -20,6 +21,15 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+// route for display user details by unique id
+Route::get('user/{id}/profile', ['as' => 'profile', 'uses' => 'UserController@profile']);
+Route::get('user/{id}/photos', ['as' => 'profile', 'uses' => 'UserController@photos']);
+Route::get('user/{id}/connections', ['as' => 'profile', 'uses' => 'UserController@connections']);
+Route::get('user/{id}/reviews', ['as' => 'profile', 'uses' => 'UserController@reviews']);
+Route::get('user/{id}/messages', ['as' => 'profile', 'uses' => 'UserController@messages']);
+Route::get('user/{id}/settings', ['as' => 'profile', 'uses' => 'UserController@settings']);
+Route::get('user/{id}/our-feed', ['as' => 'profile', 'uses' => 'UserController@ourFeed']);
 
 // route for display business details by unique id
 Route::get('business/{id}/profile', ['as' => 'profile', 'uses' => 'BusinessController@profile']);
@@ -30,7 +40,6 @@ Route::get('business/{id}/messages', ['as' => 'profile', 'uses' => 'BusinessCont
 Route::get('business/{id}/settings', ['as' => 'profile', 'uses' => 'BusinessController@settings']);
 Route::get('business/{id}/our-feed', ['as' => 'profile', 'uses' => 'BusinessController@ourFeed']);
 
-// $url = route('profile', ['id' => 1]);
 
 //routes for loggedin user home start
 Route::get('profile', ['middleware' => 'auth', 'uses' => 'HomeController@profile']);

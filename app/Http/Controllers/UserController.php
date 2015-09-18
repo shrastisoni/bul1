@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\PhotoAlbum;
 use Session;
 use Illuminate\Http\Request;
 
@@ -122,6 +123,80 @@ class UserController extends Controller {
 	    Session::flash('flash_message', 'User successfully deleted!');
 	
 	    return redirect()->route('user.index');
+	}
+	
+	/**
+	 * Display a loggedin user's business profile.
+	 *
+	 * @return Response
+	 */
+	public function profile($id)
+	{
+		//all users
+		$user = User::where('uName', $id)->first();
+    	return view('user.profile')->withUser($user);
+	}
+	
+	/**
+	 * Display a loggedin user's business albums.
+	 *
+	 * @return Response
+	 */
+	public function photos($id)
+	{
+		//all users
+		$user = User::where('uName', $id)->first();
+		$albums = PhotoAlbum::where('user_id', $user->id)->where('type', 'album')->get();
+		return view('user.photos')->withUser($user)->withAlbums($albums);
+	}
+	
+	/**
+	 * Display a loggedin user's business connections.
+	 *
+	 * @return Response
+	 */
+	public function connections($id)
+	{
+		//all users
+		$user = User::where('uName', $id)->first();
+    	return view('user.connections')->withUser($user);
+	}
+	
+	/**
+	 * Display a loggedin user's business reviews.
+	 *
+	 * @return Response
+	 */
+	public function reviews($id)
+	{
+		//all users
+		$user = User::where('uName', $id)->first();
+    	return view('user.reviews')->withUser($user);
+	}
+	
+	/**
+	 * Display a loggedin user's business messages.
+	 *
+	 * @return Response
+	 */
+	public function messages($id)
+	{
+		//all users
+		$user = User::where('uName', $id)->first();
+    	return view('user.messages')->withUser($user);
+	}
+	
+	
+	/**
+	 * Display a loggedin user's business ourFeeds.
+	 *
+	 * @return Response
+	 */
+	public function ourFeed($id)
+	{
+		//all users
+		$user = User::where('uName', $id)->first();
+    	return view('user.ourFeed')->withUser($user);
 	}
 
 }

@@ -1,0 +1,206 @@
+/*!
+ * bootstrap-vertical-tabs - v1.2.1
+ * https://dbtek.github.io/bootstrap-vertical-tabs
+ * 2014-11-07
+ * Copyright (c) 2014 İsmail Demirbilek
+ * License: MIT
+ */
+.tabs-left, .tabs-right {
+	border-bottom: none;
+	padding-top: 2px;
+}
+.tabs-left {
+	border-right: 1px solid #ddd;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding-top: 15px;
+	max-height: 860px;
+	overflow: auto;
+	margin-bottom: 20px;
+}
+.tabs-right {
+	border-left: 1px solid #ddd;
+}
+.tabs-left>li, .tabs-right>li {
+	float: none;
+	margin-bottom: 2px;
+}
+.tabs-left>li {
+	margin-right: 0;
+}
+.tabs-right>li {
+	margin-left: -1px;
+}
+.tabs-left>li.active>a, .tabs-left>li.active>a:hover, .tabs-left>li.active>a:focus {
+	display: block;
+	border: 0;
+	border-bottom: 1px solid #ccc;
+}
+.tabs-right>li.active>a, .tabs-right>li.active>a:hover, .tabs-right>li.active>a:focus {
+	border-bottom: 1px solid #ddd;
+	border-left-color: transparent;
+}
+.tabs-left>li>a {
+	/* border-radius: 4px 0 0 4px; */
+	margin-right: 0;
+	display: block;
+}
+.tabs-right>li>a {
+	border-radius: 0 4px 4px 0;
+	margin-right: 0;
+}
+.user-photo {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	border-radius: 50%;
+	display: inline-block;
+	border: 1px solid #e8e8e8;
+}
+
+.user-photo.business {
+    border-radius: 5px;
+}
+.message-meta {
+	display: inline-block;
+	font-size: 13px;
+	vertical-align: baseline;
+	width: 100%;
+	color: #838d92;
+}
+.message-meta h5 {
+	margin-top: 0;
+	color: #3f535c;
+	font-size: 13px;
+}
+.all-contacts .tabs-left a {
+	width: 94%;
+	float: left;
+	padding: 0px 0 10px;
+	border: 0;
+	border-bottom: 1px solid #ccc;
+	margin: 0px 3%;
+	margin-bottom: 0px;
+}
+.all-contacts .tabs-left li:last-child a {
+	border-bottom: 0;
+}
+.date {
+	color: #999;
+}
+.nav-tabs.tabs-left a:hover .message-meta {
+	opacity: .5;
+}
+.nav-tabs.tabs-left a:hover, .nav-tabs.tabs-left a:active, .nav-tabs.tabs-left a:focus, .nav-tabs.tabs-left li.active a:hover, .nav-tabs.tabs-left li.active a:active, .nav-tabs.tabs-left li.active a:focus {
+	background-color: transparent;
+	cursor: pointer;
+}
+.all-contacts .message-delete {
+	margin-right: 0;
+	padding: 0;
+	opacity: 0;
+    position: relative;
+    right: 10px;
+    top: -37px;
+}
+.all-contacts li:hover .message-delete {
+	opacity: 1;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:focus {
+	background-color: transparent;
+    border-color: transparent;
+}
+.delete-dialgbox {
+    top: 50%;
+    margin-top: -62px;
+}
+.message-delete button {
+	width: 12px;
+	padding: 0;
+	height: 16px;
+	border: 0;
+	background-color: transparent;
+}
+.status {
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	position: absolute;
+	top: 28px;
+	left: 28px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+}
+.online {
+	background-color: #4fb74c;
+}
+.offline {
+	background-color: #999;
+}
+.busy {
+	background-color: #b7460f;
+}
+/* scroll bar styling */
+#style-1::-webkit-scrollbar-track {
+ -webkit-box-shadow: none;
+ border-radius: 0px;
+ background-color: transparent;
+}
+ #style-1::-webkit-scrollbar {
+ width: 6px;
+ background-color: transparent;
+}
+ #style-1::-webkit-scrollbar-thumb {
+ border-radius: 0px;
+ -webkit-box-shadow: none;
+ background-color: #ccc;
+}
+#style-2::-webkit-scrollbar-track {
+ -webkit-box-shadow: none;
+ border-radius: 0px;
+ background-color: transparent;
+}
+ #style-2::-webkit-scrollbar {
+ width: 6px;
+ background-color: transparent;
+}
+ #style-2::-webkit-scrollbar-thumb {
+ border-radius: 0px;
+ -webkit-box-shadow: none;
+ background-color: #ccc;
+}
+/* End Scroll bar styling */
+.all-correspondence {
+    padding: 20px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 1%;
+    width: 74%;
+	max-height: 860px;
+	overflow: auto;
+    margin-bottom: 20px;
+}
+.col-md-2.correspondent-image {
+    width: 50px;
+}
+.message {
+    margin: 35px 0 20px;
+    display: block;
+}
+.message-thread {
+	float: left;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
+}
+.reply-message input[type="image"] {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -8px;
+}
+
+form.reply-message {
+    position: relative;
+    width: 100%;
+    float: left;
+}

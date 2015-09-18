@@ -70,12 +70,12 @@
 				<div class="navbar-header">
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 						<ul class="nav navbar-nav navbar-right">
-							<?php $UrlPath = '/'; ?>
-							@if($sections[0] != 'home')
-							<a href="/" class="active">Home</a>
-							@endif
+							<?php 
+								$UrlPath = '/'; 
+								$sections = explode("/", Route::getCurrentRoute() -> getPath()); 
+							?>
+							<a href="/">Home</a>
 							@foreach($sections as $section)
-							@if($section && (strpos($section,'{') === false))
 								<?php
 									if ($UrlPath != '#') 
 									{
@@ -83,15 +83,7 @@
 									}
 	 							?>
 							<a href="{{$UrlPath}}" class="active">{{ucfirst($section)}}</a>
-							@else
-							@if(isset($business))
-							<a href="{{$business->id}}" class="active">{{ucfirst($business->name)}}</a>
-							@endif
-								<?php 
-									$UrlPath = '#'; 
-								?>
-							@endif
-							@endforeach
+							@endforeach	
 						</ul>
 					</div>
 				</div>

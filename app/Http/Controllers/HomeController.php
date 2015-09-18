@@ -69,7 +69,8 @@ class HomeController extends Controller {
 	public function connections()
 	{
 		//all users
-    	return view('home.connections');
+    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	return view('home.connections')->withBusiness($business);
 	}
 	
 	/**
@@ -80,7 +81,8 @@ class HomeController extends Controller {
 	public function reviews()
 	{
 		//all users
-    	return view('home.reviews');
+    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	return view('home.reviews')->withBusiness($business);
 	}
 	
 	/**
@@ -91,7 +93,8 @@ class HomeController extends Controller {
 	public function messages()
 	{
 		//all users
-    	return view('home.messages');
+    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	return view('home.messages')->withBusiness($business);
 	}
 	
 	/**
@@ -102,7 +105,8 @@ class HomeController extends Controller {
 	public function settings()
 	{
 		//all users
-    	return view('home.settings');
+    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	return view('home.settings')->withBusiness($business);
 	}
 	
 	/**
@@ -113,7 +117,8 @@ class HomeController extends Controller {
 	public function ourFeed()
 	{
 		//all users
-    	return view('home.our-feed');
+    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	return view('home.our-feed')->withBusiness($business);
 	}
 
 }

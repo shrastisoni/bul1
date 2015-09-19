@@ -15,6 +15,17 @@ class BusinessController extends Controller
 	 *
 	 * @return Response
 	 */
+	public function index()
+	{
+		$businesses = Business::all();
+		return view('business.search')->withBusinesses($businesses);
+	}
+
+	/**
+	 * Show the application dashboard to the user.
+	 *
+	 * @return Response
+	 */
 	public function search()
 	{
 		$businesses = Business::all();

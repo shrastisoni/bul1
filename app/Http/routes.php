@@ -12,7 +12,6 @@
 */
 
 Route::get('/', 'WelcomeController@index');
-Route::get('home', 'HomeController@index');
 Route::get('search', 'BusinessController@search');
 Route::post('follow', 'FollowController@followIt');
 Route::resource('users', 'UserController');
@@ -23,6 +22,7 @@ Route::controllers([
 ]);
 
 // route for display user details by unique id
+Route::get('user', ['as' => 'profile', 'uses' => 'UserController@index']);
 Route::get('user/{id}/profile', ['as' => 'profile', 'uses' => 'UserController@profile']);
 Route::get('user/{id}/photos', ['as' => 'profile', 'uses' => 'UserController@photos']);
 Route::get('user/{id}/connections', ['as' => 'profile', 'uses' => 'UserController@connections']);
@@ -32,6 +32,7 @@ Route::get('user/{id}/settings', ['as' => 'profile', 'uses' => 'UserController@s
 Route::get('user/{id}/our-feed', ['as' => 'profile', 'uses' => 'UserController@ourFeed']);
 
 // route for display business details by unique id
+Route::get('business', ['as' => 'profile', 'uses' => 'BusinessController@index']);
 Route::get('business/{id}/profile', ['as' => 'profile', 'uses' => 'BusinessController@profile']);
 Route::get('business/{id}/photos', ['as' => 'profile', 'uses' => 'BusinessController@photos']);
 Route::get('business/{id}/connections', ['as' => 'profile', 'uses' => 'BusinessController@connections']);
@@ -42,6 +43,7 @@ Route::get('business/{id}/our-feed', ['as' => 'profile', 'uses' => 'BusinessCont
 
 
 //routes for loggedin user home start
+Route::get('home', 'HomeController@index');
 Route::get('profile', ['middleware' => 'auth', 'uses' => 'HomeController@profile']);
 Route::get('photos', ['middleware' => 'auth', 'uses' => 'HomeController@photos']);
 Route::get('connections', ['middleware' => 'auth', 'uses' => 'HomeController@connections']);

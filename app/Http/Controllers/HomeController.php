@@ -2,6 +2,7 @@
 use App\Business;
 use App\PhotoAlbum;
 use App\User;
+use App\UserDetail;
 use Auth;
 class HomeController extends Controller {
 
@@ -43,8 +44,17 @@ class HomeController extends Controller {
 	 */
 	public function profile()
 	{
-		//all users
-		$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+		$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
     	return view('home.profile')->withBusiness($business);
 	}
 	

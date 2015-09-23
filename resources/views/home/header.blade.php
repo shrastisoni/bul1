@@ -89,13 +89,13 @@
 			</div>
 			<!-- /.container -->
 		</nav>
-		<header style="background-image: url(/images/bg-shadow.png), url({{$business->coverPhotoPath}});">
+		<header style="background-image: url(/images/bg-shadow.png), url({{$business->coverPicPath}});">
 			<div class="container">
-				<div class="col-lg-3"><img src="{{$business->profilePhotoPath}}" class="upload-logo">
+				<div class="col-lg-3"><img src="{{$business->profilePicPath}}" class="upload-logo">
 				</div>
 				<div class="col-lg-9">
 					<h2 class="company-title">{{$business->name}}</h2>
-					<h4 class="company-type">Business Type: {{$business->type}}</h4>
+					<h4 class="company-type">@if($business->businessId) Business Type: {{$business->type}} @else {{$business->type}} @endif</h4>
 					<button type="button" class="btn btn-default green"><img src="/images/icons/chat.png" class="icon">Contact us
 					</button>
 					<button type="button" class="btn btn-default blue"><img src="/images/icons/double-right-arrow.png" class="icon">Follow

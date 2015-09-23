@@ -73,10 +73,10 @@
 							<a href="/">Home</a>
 							@foreach($sections as $section)
 								@if($section == '{id}')
-								<a href="/business/{{$business->uName}}/profile" >{{$business->name}}</a>
+								<a href="/business/{{$business->userName}}/profile" >{{$business->name}}</a>
 								<?php 
 									$classActive = 'class="active"'; 
-									$UrlPath = $UrlPath . $business->uName . '/';
+									$UrlPath = $UrlPath . $business->userName . '/';
 								?>
 								@else
 									<?php
@@ -97,9 +97,9 @@
 			</div>
 			<!-- /.container -->
 		</nav>
-		<header style="background-image: url(/images/bg-shadow.png), url({{$business->coverPhotoPath}});">
+		<header style="background-image: url(/images/bg-shadow.png), url({{$business->coverPicPath}});">
 			<div class="container">
-				<div class="col-lg-3"><img src="{{$business->profilePhotoPath}}" class="upload-logo">
+				<div class="col-lg-3"><img src="{{$business->profilePicPath}}" class="upload-logo">
 				</div>
 				<div class="col-lg-9">
 					<h2 class="company-title">{{$business->name}}</h2>

@@ -70,10 +70,10 @@
 							<a href="/">Home</a>
 							@foreach($sections as $section)
 								@if($section == '{id}')
-								<a href="/user/{{$user->uName}}/profile" >{{$user->name}}</a>
+								<a href="/user/{{$user->userName}}/profile" >{{$user->name}}</a>
 								<?php 
 									$classActive = 'class="active"'; 
-									$UrlPath = $UrlPath . $user->uName . '/';
+									$UrlPath = $UrlPath . $user->userName . '/';
 								?>
 								@else
 									<?php
@@ -94,13 +94,13 @@
 			</div>
 			<!-- /.container -->
 		</nav>
-		<header>
+		<header style="background-image: url(/images/bg-shadow.png), url({{$user->coverPicPath}});">
 			<div class="container">
 				<div class="col-lg-3"><img src="/images/bg-logo.png" class="upload-logo">
 				</div>
 				<div class="col-lg-9">
 					<h2 class="company-title">{{$user->name}}</h2>
-					<h4 class="company-type">Horse Enthusiast</h4>
+					<h4 class="company-type">{{$user->type}}</h4>
 					<a href="#">
 					<button type="button" class="btn btn-default green"><img src="/images/icons/chat.png" class="icon">Message
 					</button></a><a href="#">

@@ -203,9 +203,9 @@
 						@foreach($businesses as $business)
 							<div class="col-md-6">
 								<div class="information">
-									<img src="{{$business->coverPhotoPath}}" class="gallery-thumbnail">
+									<img src="{{$business->coverPicPath}}" class="gallery-thumbnail">
 									<div class="meta-information">
-										<span class="search-business-name">{{$business->name}}</span><span class="pro">- PRO</span>
+										<span class="search-business-name"><a href = "/business/{{$business->userName}}/profile">{{$business->name}}</a></span><span class="pro">- PRO</span>
 										<br>
 										<span class="address">
 											{{$business->location}}
@@ -216,7 +216,7 @@
 	
 								</div>
 								<div class="listing-reviews">
-									<span class="reviews pull-left"><img src="/images/icons/{{intval($business->rating)}}-star.png" class="icon">{{$business->reviewsCount}} reviews</span>
+									<span class="reviews pull-left"><img src="/images/icons/4-star.png" class="icon">15 reviews</span>
 									<span class="follow pull-right"><a href="#"></a></span>
 								</div>
 							</div>

@@ -34,6 +34,12 @@
 		<div class="col-md-9 content">
 			<h2 class="content-heading"><img src="/images/icons/file-2.png" class="icon about-us">About Me</h2>
 			<p>
+				{{$user->about}}
+			</p>
+			<p>
+				fake content
+			</p>
+			<p>
 				Maecenas nec tempor magna. Maecenas suscipit nisi ac est aliquet finibus. Quisque at dapibus odio. Ut consectetur vel mauris eget interdum. Ut ut dapibus elit, ut elementum erat. Maecenas efficitur dui sed nisi faucibus hendrerit. Suspendisse potenti. Nunc auctor ligula pellentesque, pretium mi non, lobortis ligula.
 			</p>
 			<p>

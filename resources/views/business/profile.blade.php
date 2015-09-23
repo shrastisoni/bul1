@@ -12,15 +12,15 @@
 				<br>
 				<span>Location:</span> {{$business->location}}
 				<br>
-				<span>Servicing:</span> {{$business->servicing}}
+				<span>Servicing:</span> {{$business->serviceCoverage}}
 				<br>
 				<span>Phone:</span> {{$business->phone}}
 				<br>
 				<span>Web:</span><a href="{{$business->website}}" target="_blank">{{$business->website}}</a><span></span><img src="/images/icons/facebook.png" class="social-icon"><img src="/images/icons/twitter.png" class="social-icon"><img src="/images/icons/google-plus.png" class="social-icon">
 				<div class="clearfix spacer2x"></div>
-				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">{{$business->followersCount}} Followers</span>
+				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">5 Followers</span>
 				<div class="reviews">
-					<img src="/images/icons/review.png" class="stars"><span class="rating">{{$business->rating}}</span> {{$business->reviews}} Reviews
+					<img src="/images/icons/review.png" class="stars"><span class="rating"> 8 </span> 5 Reviews
 				</div>
 				<div class="edit-page">
 					<button type="button" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
@@ -32,7 +32,7 @@
 		<div class="col-md-9 content">
 			<h2 class="content-heading"><img src="/images/icons/file-2.png" class="icon about-us">About Us</h2>
 			<p>
-				{{$business->aboutUs}}
+				{{$business->about}}
 			</p>
 			<p>
 				fake content

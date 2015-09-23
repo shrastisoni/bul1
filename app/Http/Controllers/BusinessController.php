@@ -2,6 +2,7 @@
 use App\Business;
 use App\PhotoAlbum;
 use App\User;
+use App\UserDetail;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,11 @@ class BusinessController extends Controller
 	public function index()
 	{
 		$businesses = Business::all();
+		foreach ($businesses as $key => $business) 
+		{
+			$business->userDetail = UserDetail::where('businessId', $business->id)->first();
+			$business->user = User::find($business->userDetail->userId);
+		}
 		return view('business.search')->withBusinesses($businesses);
 	}
 
@@ -29,6 +35,12 @@ class BusinessController extends Controller
 	public function search()
 	{
 		$businesses = Business::all();
+		foreach ($businesses as $key => $business) 
+		{
+			$userDetail = UserDetail::where('businessId', $business->id)->first();
+			$user = User::find($userDetail->userId);
+			$businesses[$key] = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
 		return view('business.search')->withBusinesses($businesses);
 	}
 	
@@ -39,8 +51,15 @@ class BusinessController extends Controller
 	 */
 	public function profile($id)
 	{
-		//all users
-		$business = Business::where('uName', $id)->first();
+		//business profile data
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			return redirect('/user/'.$user->userName.'/profile');
+		}
+		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
     	return view('business.profile')->withBusiness($business);
 	}
 	
@@ -52,7 +71,10 @@ class BusinessController extends Controller
 	public function photos($id)
 	{
 		//all users
-		$business = Business::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
 		$albums = PhotoAlbum::where('user_id', $business->user_id)->where('type', 'album')->get();
     	return view('business.photos')->withBusiness($business)->withAlbums($albums);
 	}

@@ -3,7 +3,9 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserDetail;
 use App\Role;
+use App\Business;
 use App\PhotoAlbum;
 use Session;
 use Illuminate\Http\Request;
@@ -132,8 +134,15 @@ class UserController extends Controller {
 	 */
 	public function profile($id)
 	{
-		//all users
-		$user = User::where('uName', $id)->first();
+		//business profile data
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(!empty($business))
+		{
+			return redirect('/business/'.$user->userName.'/profile');
+		}
+		$user = (object) array_merge($user->toArray(), $userDetail->toArray());
     	return view('user.profile')->withUser($user);
 	}
 	

@@ -82,7 +82,9 @@
 										$UrlPath = $UrlPath . $section . '/';
 									}
 	 							?>
-							<a href="{{$UrlPath}}" class="active">{{ucfirst($section)}}</a>
+	 							@if((strpos($section, '}') === false))
+								<a href="{{$UrlPath}}">{{ucfirst($section)}}</a>
+								@endif
 							@endforeach	
 						</ul>
 					</div>

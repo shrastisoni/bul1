@@ -15,9 +15,10 @@ class CreateUsermetasTable extends Migration {
 		Schema::create('usersMeta', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('userId');
-			$table->integer('phone_number');
-			$table->boolean('country');
+			$table->integer('userId')->unsigned();
+			$table->foreign('userId')->references('id')->on('users');
+			$table->string('metaKey', 200);
+			$table->string('metaValue', 250);
 			$table->integer('epochCreatedAt');
 			$table->integer('epochUpdatedAt');
 			$table->timestamps();

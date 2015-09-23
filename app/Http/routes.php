@@ -24,22 +24,22 @@ Route::controllers([
 // route for display user details by unique id
 Route::get('user', ['as' => 'profile', 'uses' => 'UserController@index']);
 Route::get('user/{id}/profile', ['as' => 'profile', 'uses' => 'UserController@profile']);
-Route::get('user/{id}/photos', ['as' => 'profile', 'uses' => 'UserController@photos']);
-Route::get('user/{id}/connections', ['as' => 'profile', 'uses' => 'UserController@connections']);
-Route::get('user/{id}/reviews', ['as' => 'profile', 'uses' => 'UserController@reviews']);
-Route::get('user/{id}/messages', ['as' => 'profile', 'uses' => 'UserController@messages']);
-Route::get('user/{id}/settings', ['as' => 'profile', 'uses' => 'UserController@settings']);
-Route::get('user/{id}/our-feed', ['as' => 'profile', 'uses' => 'UserController@ourFeed']);
+Route::get('user/{id}/photos', ['as' => 'photos', 'uses' => 'UserController@photos']);
+Route::get('user/{id}/connections', ['as' => 'connections', 'uses' => 'UserController@connections']);
+Route::get('user/{id}/reviews', ['as' => 'reviews', 'uses' => 'UserController@reviews']);
+Route::get('user/{id}/messages', ['as' => 'messages', 'uses' => 'UserController@messages']);
+Route::get('user/{id}/settings', ['as' => 'settings', 'uses' => 'UserController@settings']);
+Route::get('user/{id}/our-feed', ['as' => 'ourFeed', 'uses' => 'UserController@ourFeed']);
 
 // route for display business details by unique id
 Route::get('business', ['as' => 'profile', 'uses' => 'BusinessController@index']);
 Route::get('business/{id}/profile', ['as' => 'profile', 'uses' => 'BusinessController@profile']);
-Route::get('business/{id}/photos', ['as' => 'profile', 'uses' => 'BusinessController@photos']);
-Route::get('business/{id}/connections', ['as' => 'profile', 'uses' => 'BusinessController@connections']);
-Route::get('business/{id}/reviews', ['as' => 'profile', 'uses' => 'BusinessController@reviews']);
-Route::get('business/{id}/messages', ['as' => 'profile', 'uses' => 'BusinessController@messages']);
-Route::get('business/{id}/settings', ['as' => 'profile', 'uses' => 'BusinessController@settings']);
-Route::get('business/{id}/our-feed', ['as' => 'profile', 'uses' => 'BusinessController@ourFeed']);
+Route::get('business/{id}/photos', ['as' => 'photos', 'uses' => 'BusinessController@photos']);
+Route::get('business/{id}/connections', ['as' => 'connections', 'uses' => 'BusinessController@connections']);
+Route::get('business/{id}/reviews', ['as' => 'reviews', 'uses' => 'BusinessController@reviews']);
+Route::get('business/{id}/messages', ['as' => 'messages', 'uses' => 'BusinessController@messages']);
+Route::get('business/{id}/settings', ['as' => 'settings', 'uses' => 'BusinessController@settings']);
+Route::get('business/{id}/our-feed', ['as' => 'ourFeed', 'uses' => 'BusinessController@ourFeed']);
 
 
 //routes for loggedin user home start

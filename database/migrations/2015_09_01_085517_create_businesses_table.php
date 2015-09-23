@@ -15,25 +15,12 @@ class CreateBusinessesTable extends Migration {
 		Schema::create('businesses', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('name', 200);
-			$table->string('uName', 250);
-			$table->unique('uName');
-			$table->string('email', 200);
-			$table->unique('email');
-			$table->string('membershipLevel', 200);
 			$table->string('type', 200);
-			$table->string('location', 200);
-			$table->string('servicing', 200);
-			$table->string('phone', 20);
-			$table->string('profilePhotoPath', 200);
-			$table->string('coverPhotoPath', 200);
+			$table->string('about', 1000);
+			$table->string('phone', 15);
 			$table->string('website', 200);
-			$table->integer('followersCount');
-			$table->integer('reviewsCount');
-			$table->float('rating');
-			$table->string('aboutUs', 5000);
+			$table->string('serviceCoverage', 500);
 			$table->integer('epochCreatedAt');
 			$table->integer('epochUpdatedAt');
 			$table->timestamps();

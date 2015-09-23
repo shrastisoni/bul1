@@ -9,31 +9,54 @@
 		<!-- Sidebar Column -->
 		<div class="col-md-3 sidebar">
 			<div class="page-meta">
+				@if($business->businessId)
 				<span>Contact:</span> {{$business->name}}
 				<br>
 				<span>Location:</span> {{$business->location}}
 				<br>
-				<span>Servicing:</span> {{$business->servicing}}
+				<span>Servicing:</span> {{$business->serviceCoverage}}
 				<br>
 				<span>Phone:</span> {{$business->phone}}
 				<br>
 				<span>Web:</span><a href="{{$business->website}}" target="_blank">{{$business->website}}</a><span></span><img src="/images/icons/facebook.png" class="social-icon"><img src="/images/icons/twitter.png" class="social-icon"><img src="/images/icons/google-plus.png" class="social-icon">
 				<div class="clearfix spacer2x"></div>
-				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">{{$business->followersCount}} Followers</span>
+				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">5 Followers</span>
 				<div class="reviews">
-					<img src="/images/icons/review.png" class="stars"><span class="rating">{{$business->rating}}</span> {{$business->reviews}} Reviews
+					<img src="/images/icons/review.png" class="stars"><span class="rating">4.5</span> 15 Reviews
 				</div>
 				<div class="edit-page">
 					<button type="button" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
 					</button>
 				</div>
+				@else
+				<span>Username:</span> {{$business->name}}
+				<br>
+				<span>Location:</span> Perth, WA
+				<br>
+				<!--        <span>Servicing:</span> Australia Wide<br>
+				<span>Phone:</span> 0400 000 000<br>
+				<span>Web:</span> <a href="http://www.gary-filly.com" target="_blank">www.gary-filly.com</a>-->
+				<span></span><img src="/images/icons/facebook.png" class="social-icon"><img src="/images/icons/twitter.png" class="social-icon"><img src="/images/icons/google-plus.png" class="social-icon">
+				<div class="clearfix spacer2x"></div>
+				<span class="bookmark"><img src="/images/icons/social-circle-blue.png" class="icon">2,122 Connections</span>
+				<br>
+				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">2,122 Following</span>
+				<!--        <div class="reviews">
+				<img src="/images/icons/review.png" class="stars"> <span class="rating">4.5</span> 12 Reviews
+				</div>
+				-->
+				<div class="edit-page">
+					<button type="button" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
+					</button>
+				</div>
+				@endif
 			</div>
 		</div>
 		<!-- Content Column -->
 		<div class="col-md-9 content">
 			<h2 class="content-heading"><img src="/images/icons/file-2.png" class="icon about-us">About Us</h2>
 			<p>
-				{{$business->aboutUs}}
+				{{$business->about}}
 			</p>
 			<p>
 				fake content

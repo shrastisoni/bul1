@@ -42,6 +42,7 @@ class QuestionController extends Controller {
 		    'title' => 'required',
 		    'description' => 'required'
 		]);
+		
 		//
 		$input = $request->all();
 

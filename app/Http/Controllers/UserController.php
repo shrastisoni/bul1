@@ -136,6 +136,10 @@ class UserController extends Controller {
 	{
 		//business profile data
 		$user = User::where('userName', $id)->first();
+		if(empty($user))
+		{
+			return redirect()->back();
+		}
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
 		if(!empty($business))
@@ -155,6 +159,10 @@ class UserController extends Controller {
 	{
 		//all users
 		$user = User::where('userName', $id)->first();
+		if(empty($user))
+		{
+			return redirect()->back();
+		}
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
 		if(!empty($business))
@@ -175,6 +183,10 @@ class UserController extends Controller {
 	{
 		//all users
 		$user = User::where('userName', $id)->first();
+		if(empty($user))
+		{
+			return redirect()->back();
+		}
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
 		if(!empty($business))
@@ -194,6 +206,10 @@ class UserController extends Controller {
 	{
 		//all users
 		$user = User::where('userName', $id)->first();
+		if(empty($user))
+		{
+			return redirect()->back();
+		}
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
 		if(!empty($business))
@@ -213,6 +229,10 @@ class UserController extends Controller {
 	{
 		//all users
 		$user = User::where('userName', $id)->first();
+		if(empty($user))
+		{
+			return redirect()->back();
+		}
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
 		if(!empty($business))
@@ -233,6 +253,10 @@ class UserController extends Controller {
 	{
 		//all users
 		$user = User::where('userName', $id)->first();
+		if(empty($user))
+		{
+			return redirect()->back();
+		}
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
 		if(!empty($business))

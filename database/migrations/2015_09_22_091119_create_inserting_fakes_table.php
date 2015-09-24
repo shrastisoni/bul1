@@ -48,6 +48,19 @@ class CreateInsertingFakesTable extends Migration {
     			'epochUpdatedAt' => time()
     			]
 			);
+		
+		DB::table('users')->insert(
+    			[
+    			'userName' => 'User4',
+    			'email' => 'useremail4@horsify.com',
+    			'password' => bcrypt('password'),
+    			'state' => 'active',
+    			'roleId' => 1,
+    			'passwordEpochUpdatedAt' => time(),
+    			'epochCreatedAt' => time(),
+    			'epochUpdatedAt' => time()
+    			]
+			);
 			
 		DB::table('businesses')->insert(
     			[
@@ -97,6 +110,19 @@ class CreateInsertingFakesTable extends Migration {
     			'businessId' => 1
     			]
 			);
+		DB::table('userDetails')->insert(
+    			[
+    			'userId' => 4,
+    			'name' => 'User 4',
+    			'location' => '44 sample st, Sample town 4444',
+    			'profilePicPath' => '/images/bg-logo.png',
+    			'coverPicPath' => '/images/bg.jpg',
+    			'about' => 'This is about user 4',
+    			'type' => 'Horse Enthusiast',
+    			'businessId' => 0
+    			]
+			);
+		
 		DB::table('userDetails')->insert(
     			[
     			'userId' => 2,

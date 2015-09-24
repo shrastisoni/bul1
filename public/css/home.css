@@ -9,6 +9,7 @@
 .intro-text {
   display: table-cell;
   background-size: cover;
+  background-image: url(../images/login-bg.png);
 }
 
 #home .top-container {

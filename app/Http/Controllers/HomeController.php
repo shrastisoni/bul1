@@ -65,8 +65,17 @@ class HomeController extends Controller {
 	 */
 	public function photos()
 	{
-		//all users
-		$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+		$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
 		$albums = PhotoAlbum::where('user_id', Auth::user()->id)->where('type', 'album')->get();
     	return view('home.photos')->withBusiness($business)->withAlbums($albums);
 	}
@@ -79,7 +88,17 @@ class HomeController extends Controller {
 	public function connections()
 	{
 		//all users
-    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
     	return view('home.connections')->withBusiness($business);
 	}
 	
@@ -91,7 +110,17 @@ class HomeController extends Controller {
 	public function reviews()
 	{
 		//all users
-    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
     	return view('home.reviews')->withBusiness($business);
 	}
 	
@@ -103,7 +132,17 @@ class HomeController extends Controller {
 	public function messages()
 	{
 		//all users
-    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
     	return view('home.messages')->withBusiness($business);
 	}
 	
@@ -115,7 +154,17 @@ class HomeController extends Controller {
 	public function settings()
 	{
 		//all users
-    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
     	return view('home.settings')->withBusiness($business);
 	}
 	
@@ -127,7 +176,17 @@ class HomeController extends Controller {
 	public function ourFeed()
 	{
 		//all users
-    	$business = Business::findOrFail(User::find(Auth::user()->id)->business->id);
+    	$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
     	return view('home.our-feed')->withBusiness($business);
 	}
 

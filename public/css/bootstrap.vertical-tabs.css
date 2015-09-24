@@ -203,4 +203,5 @@ form.reply-message {
     position: relative;
     width: 100%;
     float: left;
+    margin-top: 15px;
 }

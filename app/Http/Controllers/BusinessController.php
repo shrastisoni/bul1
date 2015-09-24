@@ -74,8 +74,12 @@ class BusinessController extends Controller
 		$user = User::where('userName', $id)->first();
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			return redirect('/user/'.$user->userName.'/profile');
+		}
 		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
-		$albums = PhotoAlbum::where('user_id', $business->user_id)->where('type', 'album')->get();
+		$albums = PhotoAlbum::where('user_id', $business->userId)->where('type', 'album')->get();
     	return view('business.photos')->withBusiness($business)->withAlbums($albums);
 	}
 	
@@ -87,7 +91,14 @@ class BusinessController extends Controller
 	public function connections($id)
 	{
 		//all users
-		$business = Business::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			return redirect('/user/'.$user->userName.'/profile');
+		}
+		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
     	return view('business.connections')->withBusiness($business);
 	}
 	
@@ -99,7 +110,14 @@ class BusinessController extends Controller
 	public function reviews($id)
 	{
 		//all users
-		$business = Business::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			return redirect('/user/'.$user->userName.'/profile');
+		}
+		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
     	return view('business.reviews')->withBusiness($business);
 	}
 	
@@ -111,7 +129,14 @@ class BusinessController extends Controller
 	public function messages($id)
 	{
 		//all users
-		$business = Business::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			return redirect('/user/'.$user->userName.'/profile');
+		}
+		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
     	return view('business.messages')->withBusiness($business);
 	}
 	
@@ -124,7 +149,14 @@ class BusinessController extends Controller
 	public function ourFeed($id)
 	{
 		//all users
-		$business = Business::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			return redirect('/user/'.$user->userName.'/profile');
+		}
+		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
     	return view('business.our-feed')->withBusiness($business);
 	}
 

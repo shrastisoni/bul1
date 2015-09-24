@@ -154,7 +154,14 @@ class UserController extends Controller {
 	public function photos($id)
 	{
 		//all users
-		$user = User::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(!empty($business))
+		{
+			return redirect('/business/'.$user->userName.'/profile');
+		}
+		$user = (object) array_merge($user->toArray(), $userDetail->toArray());
 		$albums = PhotoAlbum::where('user_id', $user->id)->where('type', 'album')->get();
 		return view('user.photos')->withUser($user)->withAlbums($albums);
 	}
@@ -167,7 +174,14 @@ class UserController extends Controller {
 	public function connections($id)
 	{
 		//all users
-		$user = User::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(!empty($business))
+		{
+			return redirect('/business/'.$user->userName.'/profile');
+		}
+		$user = (object) array_merge($user->toArray(), $userDetail->toArray());
     	return view('user.connections')->withUser($user);
 	}
 	
@@ -179,7 +193,14 @@ class UserController extends Controller {
 	public function reviews($id)
 	{
 		//all users
-		$user = User::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(!empty($business))
+		{
+			return redirect('/business/'.$user->userName.'/profile');
+		}
+		$user = (object) array_merge($user->toArray(), $userDetail->toArray());
     	return view('user.reviews')->withUser($user);
 	}
 	
@@ -191,7 +212,14 @@ class UserController extends Controller {
 	public function messages($id)
 	{
 		//all users
-		$user = User::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(!empty($business))
+		{
+			return redirect('/business/'.$user->userName.'/profile');
+		}
+		$user = (object) array_merge($user->toArray(), $userDetail->toArray());
     	return view('user.messages')->withUser($user);
 	}
 	
@@ -204,7 +232,14 @@ class UserController extends Controller {
 	public function ourFeed($id)
 	{
 		//all users
-		$user = User::where('uName', $id)->first();
+		$user = User::where('userName', $id)->first();
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(!empty($business))
+		{
+			return redirect('/business/'.$user->userName.'/profile');
+		}
+		$user = (object) array_merge($user->toArray(), $userDetail->toArray());
     	return view('user.ourFeed')->withUser($user);
 	}
 

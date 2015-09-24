@@ -1,0 +1,29 @@
+.intro {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: table;
+  text-align: center;
+  background-size: cover;
+  background-image: url(../images/login-bg.png);
+ 
+}
+.login-form {
+ 	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	z-index: 1;
+	color:#fff;
+}
+
+.feed-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 0;
+    z-index: 0;
+    padding: 0;
+}

@@ -87,6 +87,82 @@ a:hover {
 .baseline {
 	vertical-align: baseline;
 }
+/************* Loader *************/
+.loader:before,
+.loader:after,
+.loader {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: load7 1.8s infinite ease-in-out;
+  animation: load7 1.8s infinite ease-in-out;
+}
+.loader {
+  font-size: 5px;
+  margin: 0px auto 50px;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+  line-height: 42px;
+}
+.loader:before {
+  left: -4em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 4em;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+@-webkit-keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #268ad5;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #268ad5;
+  }
+}
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #268ad5;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0 #268ad5;
+  }
+}
+.loader-modal .modal-sm {
+    width: 420px;
+    position: absolute;
+    left: 50%;
+    margin-left: -210px;
+    top: 50%;
+    margin-top: -76px;
+}
+
+.loader-modal .modal-content {
+    border: 0;
+    border-radius: 5px;
+    text-align: center;
+    padding: 40px;
+    padding-top: 25px;
+}
+
+/************* End Loader **************/
 nav.navbar.top {
 	margin: 0;
 	border-radius: 0;
@@ -602,10 +678,15 @@ span.search-toolbar {
 .information {
 	position: relative;
 	max-height: 332px;
-	overflow: hidden;
+	min-height: 332px;
+	overflow: hidden;	
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
 .search-results.grid .gallery-thumbnail {
 	border: 0;
+    max-width: none;
+    width: inherit;
 }
 .search-business-name {
 	font-size: 24px;

@@ -51,4 +51,11 @@ Route::get('reviews', ['middleware' => 'auth', 'uses' => 'HomeController@reviews
 Route::get('messages', ['middleware' => 'auth', 'uses' => 'HomeController@messages']);
 Route::get('settings', ['middleware' => 'auth', 'uses' => 'HomeController@settings']);
 Route::get('our-feed', ['middleware' => 'auth', 'uses' => 'HomeController@ourFeed']);
+
+//for messaging system
+Route::get('/getUnreadMessage', 'HomeController@getUnreadMessage');
+Route::get('/getAllMessage', 'HomeController@getAllMessage');
+Route::get('/sentMessages', 'HomeController@sentMessage');
+Route::get('/getShortDescriptions', 'HomeController@getShortDescription');
+Route::get('/getUserMessage', 'HomeController@getUserMessage');
 //routes for loggedin user home end

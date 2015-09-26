@@ -53,7 +53,7 @@
 					<li class="active" ng-repeat="displayShort in displayShortData" ng-click="getUserMessage(displayShort.from)">
 						<a href="#message1" data-toggle="tab">
 						<div class="col-md-2 no-padding">
-							<span class="user-photo"><img style="width: 40px;" src="<% displayShort.path %>"></span><span class="status online"></span>
+							<span class="user-photo"><img style="width: 40px;" ng-src="<% displayShort.path ? displayShort.path :'/images/bg-logo.png'%>"></span><span class="status online"></span>
 						</div>
 						<div class="col-md-10 no-padding">
 							<span class="message-meta"> <h5><% displayShort.from %><span class="date pull-right"><% displayShort.epoch | date:'EEE d' %></span></h5> <% displayShort.subject %></span>
@@ -86,7 +86,8 @@
 				<div class="tab-content" ng-repeat="display in displayData">
 					<div class="message-thread" >
 						<div class="col-md-2 no-padding correspondent-image">
-							<span class="user-photo"><img style="width: 40px;" src="<% display.path %>"></span><span class="status busy"></span>
+						
+							<span class="user-photo"><img style="width: 40px;"  ng-src="<% display.path ? display.path :'/images/bg-logo.png'%>"></span><span class="status busy"></span>
 						</div>
 						<br>
 						<div class="col-md-11 no-padding correspondent-meta" >
@@ -141,8 +142,9 @@ var app = angular.module('messagePage', ['ngSanitize'], function($interpolatePro
     		});
 
 //inserting send message into the database 
-app.controller('messageCtrl', ['$scope', '$http', '$compile', '$sce', function($scope, $http, $compile, $sce) {
+app.controller('messageCtrl', ['$scope', '$http', '$compile', '$sce', '$timeout', function($scope, $http, $compile, $sce, $timeout) {
 	
+
 	$scope.expandTextArea = function() {
 	    $("#expand").animate({ height: "100px" }, 500); 
 	    $("#showTextField").css('display', 'block');
@@ -170,6 +172,7 @@ app.controller('messageCtrl', ['$scope', '$http', '$compile', '$sce', function($
 	};
 
 	$scope.getUserMessage = function($fromID) {
+		
 		var data = {user: 'useremail1@horsify.com'};
 		$http({
 		    url: "/getUserMessage", 
@@ -187,6 +190,7 @@ app.controller('messageCtrl', ['$scope', '$http', '$compile', '$sce', function($
 	//get short description 
 	//function for sending message
 	$scope.sendShortMessage = function() {
+		
 		$http({
 		    url: "/getShortDescriptions", 
 		    method: "GET"
@@ -195,6 +199,16 @@ app.controller('messageCtrl', ['$scope', '$http', '$compile', '$sce', function($
 			$scope.displayShortData = response;
 	 	});
 	};
+
+	function refershCountinue()
+	{
+		$scope.sendShortMessage();
+		$scope.getUserMessage();
+		$timeout(refershCountinue, 500);
+	}
+
+	$timeout(refershCountinue, 500);
+
 }]);
 </script>
 <style>

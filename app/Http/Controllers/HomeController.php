@@ -326,14 +326,7 @@ class HomeController extends Controller {
 	    		$epoch = strtotime($value['created_at']);	
 				$value['epoch'] = $epoch;
 	    	}
-
-	    	//escapting html special character to display in fornt end
-	    	/*if(isset($value['message']))
-	    	{
-	    		$value['message'] = htmlspecialchars($value['message']);
-	    	}*/
-	    }
-		
+		}
 		return $message1;
 	}
 

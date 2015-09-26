@@ -153,5 +153,4 @@ class BusinessController extends Controller
 		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
     	return view('business.our-feed')->withBusiness($business);
 	}
-
 }

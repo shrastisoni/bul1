@@ -1,6 +1,100 @@
-@extends('home.header')
+<!doctype html>
+<html ng-app="imageuploadDemo" ng-init="image2.url = '{{$business->profilePicPath}}'; coverPic.url = '{{$business->coverPicPath}}'">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Horsify | Profile - Edit</title>
 
-@section('content')
+<link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" href="/images/apple-touch-iphone.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-ipad.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-iphone4.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-ipad-retina.png" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+<!-- Custom CSS -->
+<link href="/css/style.css" rel="stylesheet">
+
+<link href='http://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+
+<body id="profile-edit" ng-controller="DemoCtrl">
+
+<!-- Navigation -->
+<nav class="navbar top" role="navigation">
+  <div class="top-container first">
+    <div class="navbar-header">
+      <button type="button" class="btn btn-default top-bar-categories blue">Browse Categories</button>
+    </div>
+    <div class="logo"> <a href="/"><img src="/images/horsify-logo.png"></a> </div>
+    <div class="account">
+      <ul class="nav navbar-nav navbar-right top-nav-first">
+        <li> <a href="/search"><i class="fa fa-search"></i></a> </li>
+        @if(Auth::check())
+		<li>
+			<a href="/auth/logout">Logout</a>
+		</li>
+		@else
+		<li>
+			<a href="/auth/login">Log in</a>
+		</li>
+		<li>
+			<a href="/auth/register">Join now</a>
+		</li>
+		@endif
+      </ul>
+    </div>
+  </div>
+  <div class="top-container second"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav navbar-right">
+         <?php 
+			$UrlPath = '/'; 
+			$sections = explode("/", Route::getCurrentRoute() -> getPath()); 
+		?>
+		<a href="/">Home</a>
+		@foreach($sections as $section)
+			<?php
+				if ($UrlPath != '#') 
+				{
+					$UrlPath = $UrlPath . $section . '/';
+				}
+				?>
+		<a href="{{$UrlPath}}" class="active">{{ucfirst($section)}}</a>
+		@endforeach	
+        </ul>
+      </div>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling --> 
+    
+    <!-- /.navbar-collapse --> 
+  </div>
+  <!-- /.container --> 
+</nav>
+<input style="display:none;" id="coverPic" type="file" accept="image/*" image="coverPic"/>
+<header style="background-image: url(/images/bg-shadow.png), url(<%coverPic.url%>);">
+  <div class="container">
+  	<div class="update-cover-photo"><a href="#" ng-click="chooseImage('coverPic')"><img src="images/icons/camera.png"> <span>Update Banner Photo</span></a></div>
+    <div class="col-lg-3"><a href="#" ng-click="chooseImage('inputImage2')" class="update-profile-photo"><img src="images/icons/camera.png" class="icon"><span>Update Photo/Logo</span></a>
+    <input style="display:none;" id="inputImage2" type="file" accept="image/*" image="image2"/>
+    <img ng-show="image2" height="180px" width="220px" ng-src="<%image2.url%>" class="upload-logo"></div>
+    <div class="col-lg-9">
+      <h2 class="company-title">{{$business->name}}</h2>
+      <h4 class="company-type">@if($business->businessId) Business Type: {{$business->type}} @else {{$business->type}} @endif</h4>
+      <button type="button" class="btn btn-default green"><img src="images/icons/chat.png" class="icon">Contact us</button><button type="button" class="btn btn-default blue"><img src="images/icons/double-right-arrow.png" class="icon">Follow</button>
+    </div>
+  </div>
+</header>
+@include('home.profileMenu')
 
 <div class="container">
 
@@ -294,4 +388,64 @@
 	<!-- /.row -->
 
 </div>
-@endsection
+<div class="container">
+		<!-- Footer -->
+			<footer>
+				<div class="footer-logo">
+					<img src="/images/horsify-footer.png">
+				</div>
+				<div class="row footer-menu">
+					<div class="col-lg-12">
+						<a href="#">Horsify Info </a><a href="#">Contact Us </a><a href="#">Privacy Policy </a><a href="#">Site map </a><a href="#">How it works </a><a href="#">Articles </a>
+					</div>
+				</div>
+				<div class="row copyright">
+
+					<div class="col-lg-12">
+						<p>
+							&copy; 2015 Horsify Australia. All rights reserved.
+						</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<!-- jQuery -->
+		<script src="/js/jquery.js"></script>
+		<script src="/js/angular.min.js" type="text/javascript"></script>
+	    <script type="text/javascript">
+	          angular.module('imageuploadDemo', ['imageupload'], function($interpolateProvider, $compileProvider) {
+	               $interpolateProvider.startSymbol('<%');
+	               $interpolateProvider.endSymbol('%>');
+	           })
+	            .controller('DemoCtrl', function($scope, $http) {
+	            	$scope.chooseImage = function(imageId) {
+	            		$('#'+imageId).click();
+					};
+	                $scope.single = function(image) {
+	                    var formData = new FormData();
+	                    formData.append('image', image, image.name);
+	                    $http.post('upload', formData, {
+	                        headers: { 'Content-Type': false },
+	                        transformRequest: angular.identity
+	                    }).success(function(result) {
+	                        $scope.uploadedImgSrc = result.src;
+	                        $scope.sizeInBytes = result.size;
+	                    });
+	                };
+	            });
+	    </script>
+	    <script src="/js/imageupload.js" type="text/javascript"></script>
+		<!--<script src="js/enscroll-0.6.1.min.js"></script> <!-- Scroll bar styling -->
+		<!-- Bootstrap Core JavaScript -->
+		<script src="/js/bootstrap.min.js"></script>
+		<!--<script>
+		$('.tabs-left').enscroll({
+		showOnHover: true,
+		verticalTrackClass: 'track3',
+		verticalHandleClass: 'handle3'
+		});
+		</script>
+		-->
+	</body>
+</html>

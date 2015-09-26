@@ -10,24 +10,13 @@
 			<div class="page-meta">
 				<span>Username:</span> {{$user->name}}
 				<br>
-				<span>Location:</span> Perth, WA
+				<span>Location:</span> {{$user->location}}
 				<br>
-				<!--        <span>Servicing:</span> Australia Wide<br>
-				<span>Phone:</span> 0400 000 000<br>
-				<span>Web:</span> <a href="http://www.gary-filly.com" target="_blank">www.gary-filly.com</a>-->
 				<span></span><img src="/images/icons/facebook.png" class="social-icon"><img src="/images/icons/twitter.png" class="social-icon"><img src="/images/icons/google-plus.png" class="social-icon">
 				<div class="clearfix spacer2x"></div>
 				<span class="bookmark"><img src="/images/icons/social-circle-blue.png" class="icon">2,122 Connections</span>
 				<br>
 				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">2,122 Following</span>
-				<!--        <div class="reviews">
-				<img src="/images/icons/review.png" class="stars"> <span class="rating">4.5</span> 12 Reviews
-				</div>
-				-->
-				<div class="edit-page">
-					<button type="button" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
-					</button>
-				</div>
 			</div>
 		</div>
 		<!-- Content Column -->
@@ -35,18 +24,6 @@
 			<h2 class="content-heading"><img src="/images/icons/file-2.png" class="icon about-us">About Me</h2>
 			<p>
 				{{$user->about}}
-			</p>
-			<p>
-				fake content
-			</p>
-			<p>
-				Maecenas nec tempor magna. Maecenas suscipit nisi ac est aliquet finibus. Quisque at dapibus odio. Ut consectetur vel mauris eget interdum. Ut ut dapibus elit, ut elementum erat. Maecenas efficitur dui sed nisi faucibus hendrerit. Suspendisse potenti. Nunc auctor ligula pellentesque, pretium mi non, lobortis ligula.
-			</p>
-			<p>
-				Proin ex augue, pulvinar sagittis varius vel, finibus eu tortor. Integer porttitor eu eros id auctor.
-			</p>
-			<p>
-				Aenean sit amet augue scelerisque dui semper aliquam vitae quis sem. In ut lorem iaculis, efficitur est scelerisque, mattis augue. Mauris maximus auctor lorem, sed consequat dolor vestibulum at. Duis finibus vulputate quam, a aliquet sapien ornare at. Curabitur auctor mollis nunc, eu suscipit ex tincidunt ac. Morbi ipsum dui, iaculis vitae fringilla suscipit, ultrices a dui. Aenean neque quam, suscipit sed tempor ut, egestas at quam. Duis id eros eu erat mattis sodales.
 			</p>
 			<h2 class="content-heading"><img src="/images/icons/album-2.png" class="icon photos">Photos</h2>
 			<div class="photo-gallery">

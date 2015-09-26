@@ -62,8 +62,8 @@ class UserTableSeeder extends Seeder
     			'userId' => $i,
     			'name' => $faker->name,
     			'location' => $faker->streetAddress,
-    			'profilePicPath' => '/images/bg-logo.png',
-    			'coverPicPath' => '/images/bg.jpg',
+    			'profilePicPath' => '/images/small/'.rand(1, 10).'s.jpg',
+    			'coverPicPath' => '/images/large/'.rand(1, 10).'l.jpg',
     			'about' => Faker\Provider\Lorem::sentence($nbWords = 30),
     			'type' => Faker\Provider\Lorem::sentence($nbWords = 2),
     			'businessId' => $i
@@ -86,7 +86,7 @@ class UserTableSeeder extends Seeder
             );
             DB::table('businesses')->insert(
     			[
-    			'name' => 'Bisiness '.($i - 100),
+    			'name' => 'Business '.($i - 100),
     			'type' => $faker->catchPhrase,
     			'about' => 'We are '.$faker->company.' '.$faker->companySuffix.'. We\'re working '.$faker->bs.'.',
     			'phone' => $faker->phoneNumber,
@@ -101,8 +101,8 @@ class UserTableSeeder extends Seeder
     			'userId' => $i,
     			'name' => 'User '.($i - 100),
     			'location' => $faker->streetAddress,
-    			'profilePicPath' => '/images/bg-logo.png',
-    			'coverPicPath' => '/images/bg.jpg',
+    			'profilePicPath' => '/images/small/'.rand(1, 10).'s.jpg',
+    			'coverPicPath' => '/images/large/'.rand(1, 10).'l.jpg',
     			'about' => Faker\Provider\Lorem::sentence($nbWords = 30),
     			'type' => Faker\Provider\Lorem::sentence($nbWords = 2),
     			'businessId' => $i
@@ -129,8 +129,8 @@ class UserTableSeeder extends Seeder
     			'userId' => $i,
     			'name' => 'User '.($i - 100),
     			'location' => $faker->streetAddress,
-    			'profilePicPath' => '/images/bg-logo.png',
-    			'coverPicPath' => '/images/bg.jpg',
+    			'profilePicPath' => '/images/small/'.rand(1, 10).'s.jpg',
+    			'coverPicPath' => '/images/large/'.rand(1, 10).'l.jpg',
     			'about' => Faker\Provider\Lorem::sentence($nbWords = 30),
     			'type' => Faker\Provider\Lorem::sentence($nbWords = 2),
     			'businessId' => 0

@@ -20,11 +20,7 @@
 				<div class="clearfix spacer2x"></div>
 				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">5 Followers</span>
 				<div class="reviews">
-					<img src="/images/icons/review.png" class="stars"><span class="rating"> 8 </span> 5 Reviews
-				</div>
-				<div class="edit-page">
-					<button type="button" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
-					</button>
+					<img src="/images/icons/review.png" class="stars"><span class="rating"> 4.5 </span> 5 Reviews
 				</div>
 			</div>
 		</div>
@@ -33,18 +29,6 @@
 			<h2 class="content-heading"><img src="/images/icons/file-2.png" class="icon about-us">About Us</h2>
 			<p>
 				{{$business->about}}
-			</p>
-			<p>
-				fake content
-			</p>
-			<p>
-				Maecenas nec tempor magna. Maecenas suscipit nisi ac est aliquet finibus. Quisque at dapibus odio. Ut consectetur vel mauris eget interdum. Ut ut dapibus elit, ut elementum erat. Maecenas efficitur dui sed nisi faucibus hendrerit. Suspendisse potenti. Nunc auctor ligula pellentesque, pretium mi non, lobortis ligula.
-			</p>
-			<p>
-				Proin ex augue, pulvinar sagittis varius vel, finibus eu tortor. Integer porttitor eu eros id auctor.
-			</p>
-			<p>
-				Aenean sit amet augue scelerisque dui semper aliquam vitae quis sem. In ut lorem iaculis, efficitur est scelerisque, mattis augue. Mauris maximus auctor lorem, sed consequat dolor vestibulum at. Duis finibus vulputate quam, a aliquet sapien ornare at. Curabitur auctor mollis nunc, eu suscipit ex tincidunt ac. Morbi ipsum dui, iaculis vitae fringilla suscipit, ultrices a dui. Aenean neque quam, suscipit sed tempor ut, egestas at quam. Duis id eros eu erat mattis sodales.
 			</p>
 			<h2 class="content-heading"><img src="/images/icons/services.png" class="icon services">Services</h2>
 			<ul class="fa-ul">

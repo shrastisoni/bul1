@@ -1,4 +1,4 @@
-@extends('home.header')
+@extends('business.header')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
 	<!-- Content Row -->
 	<div class="row"  ng-controller="messageCtrl">
-		<div class="col-lg-12" ng-init="getMessage();">
+		<div class="col-lg-12" >
 			<h2 class="content-heading"><img src="/images/icons/messages.png" class="icon">Messages</h2>
 			<div class="col-md-3 no-padding">
 				<a href="#">
@@ -46,17 +46,17 @@
 				</form>
 			</div>
 			<div class="clearfix spacer"></div>
-			<div class="col-xs-3 all-contacts no-padding" ng-init="sendShortMessage()">
+			<div class="col-xs-3 all-contacts no-padding" style="z-index:10" ng-init="sendShortMessage()">
 				<!-- required for floating -->
 				<!-- Nav tabs -->
-				<ul class="nav nav-tabs tabs-left" id="style-1" ng-repeat="displayShort in displayShortData" ng-click="getUserMessage(displayShort.from)">
-					<li class="active">
+				<ul class="nav nav-tabs tabs-left" id="style-1" >
+					<li class="active" ng-repeat="displayShort in displayShortData" ng-click="getUserMessage(displayShort.from)">
 						<a href="#message1" data-toggle="tab">
 						<div class="col-md-2 no-padding">
-							<span class="user-photo"><img src="/images/reviews-1.png"></span><span class="status online"></span>
+							<span class="user-photo"><img style="width: 40px;" src="<% displayShort.path %>"></span><span class="status online"></span>
 						</div>
 						<div class="col-md-10 no-padding">
-							<span class="message-meta"> <h5><% displayShort.from %><span class="date pull-right"><% displayShort.created_at | date:'EEE d' %></span></h5> <% displayShort.subject %></span>
+							<span class="message-meta"> <h5><% displayShort.from %><span class="date pull-right"><% displayShort.epoch | date:'EEE d' %></span></h5> <% displayShort.subject %></span>
 						</div> </a>
 						<span class="message-delete"><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".delete1"></button></span>
 						<div class="modal fade delete1 delete-dialogbox" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -81,65 +81,70 @@
 				</ul>
 			</div>
 
-			<div class="col-xs-9 all-correspondence" id="style-2" ng-init="getMessage();">
+			<div class="col-xs-9 all-correspondence" style="z-index:10" id="style-2" >
 				<!-- Tab panes -->
 				<div class="tab-content" ng-repeat="display in displayData">
 					<div class="message-thread" >
 						<div class="col-md-2 no-padding correspondent-image">
-							<span class="user-photo"><img src="/images/reviews-3.png"></span><span class="status busy"></span>
+							<span class="user-photo"><img style="width: 40px;" src="<% display.path %>"></span><span class="status busy"></span>
 						</div>
 						<br>
 						<div class="col-md-11 no-padding correspondent-meta" >
-							<span class="message-meta"><h5><% display.subject %><span class="date pull-right"><% display.created_at | date:'EEE d' %></span></h5> <span><% display.from %></span><span class="message-delete"><button></button></span> </span>
+							<span class="message-meta" style="width: 800px;"><h5> <% display.subject %> <span class="date pull-right"><% display.epoch | date:'EEE d' %></span></h5> <span><% display.from %></span><span class="message-delete"><button></button></span> </span>
 							<br>
-							<span class="message"><% display.message %></span>
+							<span class="message" ng-bind-html="display.escapedHtml"></span>
 						</div>
 						<br>
 					</div>
 				</div>
-				<input id="hideInputField" type="text" placeholder="Write reply here ..." class="col-md-12 no-margin" ng-focus="expandTextArea();" />
-				<div id="showTextField" style="position: relative;display:none">
-					
-					<textarea ng-model="message.text" id="expand" placeholder="Write reply here ..." class="col-md-12 no-margin"  >
-					</textarea>
-					<input type="image" name="submit" src="/images/icons/send.png" border="0" alt="Submit" ng-click="sendMessage()" /> 
-				</div>
 			</div>
+			<input id="hideInputField" type="text" style="width: 74%;margin-left: 26%;" placeholder="Write reply here ..." class="col-md-12 no-margin" ng-focus="expandTextArea();" />
+			<div id="showTextField" style="display:none;width: 74%;margin-left: 26%;">
+				<div  id="expand" placeholder="Write reply here ..." class="col-md-12 no-margin"  >
+					
+				</div>
+				<input type="image" name="submit" src="/images/icons/send.png" border="0" alt="Submit" ng-click="sendMessage()" /> 
+			</div>
+
+
 		</div>
+		
 	</div>
+
 </div>
 	<!-- /.row -->
 </div>
 
+
+
 @endsection
+
 <script src="/js/jquery.js"></script>
 <script src="/js/angular.min.js"></script>
 <script src="/js/tinymce.min.js"></script>
-<!-- tinymce text editor UI Customization-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-sanitize.js"></script>
 <script>
-	tinymce.init(
-		{
-			selector:'textarea',
-			menubar: false,
-			height : "50",
-			file_browser_callback : 'myFileBrowser'
-		});
+	tinymce.init({
+		selector:'#expand',
+		menubar: false,
+		height : "50",
+		file_browser_callback : 'myFileBrowser'
+	});
 
 	
 </script>
 
 <script>
-var app = angular.module('messagePage', [], function($interpolateProvider) {
-	        $interpolateProvider.startSymbol('<%');
-	        $interpolateProvider.endSymbol('%>');
-    	});
+var app = angular.module('messagePage', ['ngSanitize'], function($interpolateProvider, $compileProvider) {
+        		$interpolateProvider.startSymbol('<%');
+        		$interpolateProvider.endSymbol('%>');
+    		});
 
 //inserting send message into the database 
-app.controller('messageCtrl', function($scope, $http) {
+app.controller('messageCtrl', ['$scope', '$http', '$compile', '$sce', function($scope, $http, $compile, $sce) {
 	
 	$scope.expandTextArea = function() {
-
-	    $("#expand").animate({ height: "8em" }, 500); 
+	    $("#expand").animate({ height: "100px" }, 500); 
 	    $("#showTextField").css('display', 'block');
 	    $("#hideInputField").css('display', 'none');
     };
@@ -149,7 +154,7 @@ app.controller('messageCtrl', function($scope, $http) {
 		$("#showTextField").css('display', 'none');
 	    $("#hideInputField").css('display', 'block');
 	    tinyData = tinyMCE.activeEditor.getContent();
-	    console.log(tinyData);
+	
 		var data = {
 					message: tinyData
 				   };
@@ -159,29 +164,22 @@ app.controller('messageCtrl', function($scope, $http) {
 		    params: data
 		 })
 		.success(function(response) {
-			$scope.getMessage();
+			$scope.getUserMessage();
 			$scope.sendShortMessage();
 		});
 	};
 
-	//get all the message which is realted to logged in user
-	$scope.getMessage = function() {
-		$http({
-		    url: "/getAllMessage", 
-		    method: "GET",
-	    })
-	    .success(function(response) {
-	    });
-	};
-
 	$scope.getUserMessage = function($fromID) {
-		var data = {user: $fromID};
+		var data = {user: 'useremail1@horsify.com'};
 		$http({
 		    url: "/getUserMessage", 
 		    method: "GET",
 		    params: data
 	    })
 	    .success(function(response) {
+	    	angular.forEach(response, function(value) {
+			  	value.escapedHtml = $sce.trustAsHtml(value.message);
+			});
 	    	$scope.displayData = response;
 	 	});
 	};
@@ -194,9 +192,14 @@ app.controller('messageCtrl', function($scope, $http) {
 		    method: "GET"
 	    })
 		.success(function(response) {
-			console.log(response);
 			$scope.displayShortData = response;
 	 	});
 	};
-});
+}]);
 </script>
+<style>
+.mce-panel
+{
+	background-color: #fff !important;
+}
+</style>

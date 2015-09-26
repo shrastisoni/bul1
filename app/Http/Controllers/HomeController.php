@@ -209,6 +209,7 @@ class HomeController extends Controller {
 		$result = $request->all();
 		$result['subject'] = "chat";
 		
+		//insert different data for messade meta table
 		$messageMetaId = DB::table('message_meta')->insertGetId(
 					array(
 					    'subject' => $result['subject'],
@@ -216,6 +217,7 @@ class HomeController extends Controller {
 					    )
 					);
 		
+		//insert different data for message content table
 		$messageContentId = DB::table('message_content')->insertGetId(
 					array(
 					    'meta_Id' => $messageMetaId, 
@@ -228,6 +230,7 @@ class HomeController extends Controller {
 					    )
 					);
 
+		//insert different data for message receipient table
 		$messageReceipientId = DB::table('message_receipient')->insertGetId(
 					array(
 					    'meta_Id' => $messageMetaId, 
@@ -254,8 +257,9 @@ class HomeController extends Controller {
 	 */
 	public function getUnreadMessage(Request $request)
 	{
+		//fetching all unread message 
 	    $messageMeta = MessageReceipient::all();
-		return $messageMeta;
+	    return $messageMeta;
 	}
 
 	/**
@@ -265,17 +269,20 @@ class HomeController extends Controller {
 	 */
 	public function getAllMessage(Request $request)
 	{
+		////getting all the receipiant ids on the basis of looged in user
 		$userId = Auth::user()->email;
-		$message = MessageReceipient::where('receipient_ID', $userId)->get();
+		$messageReceipaient = MessageReceipient::where('receipient_ID', $userId)->get();
 		$metaIds = array();
 
-		foreach ($message as $key => $value) 
+		//storing all the message recepiaent 
+		foreach ($messageReceipaient as $key => $value) 
 		{
 			$metaIds[] = $value['meta_Id'];
 		}
 
-		$message = Message::whereIn('meta_Id', $metaIds)->get();
-		return $message;
+		//fetching all the message to display
+		$messageReceipaientResult = Message::all();
+		return $messageReceipaientResult;
 	}
 
 	/**
@@ -293,22 +300,39 @@ class HomeController extends Controller {
 		
 		//logged in user
 		$userId = Auth::user()->email;
+		
+		$message1 = Message::all();
+		foreach ($message1 as $key => $value) {
+	    	
+	    	//getting profile pic path
+	    	$email = $value['from'];
+			$userName = User::where('email', $email)->pluck('id');
+			$profilePic = UserDetail::where('userid', $userName)->pluck('profilePicPath');
+			$value['path'] = $profilePic;	
 
-		$message1 = DB::table('message_content')
-            ->join('message_receipient', 'message_content.meta_Id', '=', 'message_receipient.meta_Id')
-            ->select('message_content.message', 'message_content.subject', 'message_content.from', 'message_content.created_at', 'message_receipient.receipient_ID')
-            ->where('message_receipient.receipient_ID', $userId)
-            ->where('message_content.from', $fromUser)
-            ->orderBy('message_content.created_at', 'desc')
-            ->get();
+			//checking data to display user name
+	    	if($value['from'] == $userId)
+	    	{
+	    		$value['from'] = "Me";	
+	    	}
+	    	else
+	    	{
+	    		$value['from'] = UserDetail::where('userid', $userName)->pluck('name');
+	    	}
 
-        $message2 = DB::table('message_content')
-            ->join('message_receipient', 'message_content.meta_Id', '=', 'message_receipient.meta_Id')
-            ->select('message_content.message', 'message_content.subject', 'message_content.from', 'message_content.created_at', 'message_receipient.receipient_ID')
-            ->where('message_receipient.receipient_ID', $fromUser)
-            ->where('message_content.from', $userId)
-            ->orderBy('message_content.created_at', 'desc')
-            ->get();
+	    	//changing date to epoch time to display in front end
+			if(isset($value['created_at']))
+	    	{
+	    		$epoch = strtotime($value['created_at']);	
+				$value['epoch'] = $epoch;
+	    	}
+
+	    	//escapting html special character to display in fornt end
+	    	/*if(isset($value['message']))
+	    	{
+	    		$value['message'] = htmlspecialchars($value['message']);
+	    	}*/
+	    }
 		
 		return $message1;
 	}
@@ -320,16 +344,46 @@ class HomeController extends Controller {
 	 */
 	public function getShortDescription(Request $request)
 	{
+		//fetching all the receipient ids 
 		$userId = Auth::user()->email;
 		$message = MessageReceipient::where('receipient_ID', $userId)->get();
 		$metaIds = array();
 
+		//fetching meta ids and storing in the array
 		foreach ($message as $key => $value) 
 		{
 			$metaIds[] = $value['meta_Id'];
 		}
 
+		//getting all the message corresponding to a user
 		$message = Message::whereIn('meta_Id', $metaIds)->groupBy('from')->get();
+		foreach ($message  as $key => $value) {
+
+			//fetching user id on the basis of email
+			$email = $value['from'];
+			$userName = User::where('email', $email)->pluck('id');
+
+			//converting time into epoch value
+			$epoch = strtotime($value['created_at']);	
+			$value['epoch'] = $epoch;
+
+			//user name on the basis of email
+			if($value['from'] == $userId)
+	    	{
+	    		//if message is sending by logged in user set "me"
+	    		$value['from'] = "Me";	
+	    	}
+	    	else
+	    	{
+	    		//if message is sending by other email address then set user name instead of email id
+	    		$value['from'] = UserDetail::where('userid', $userName)->pluck('name');
+	    	}
+
+	    	//getting user profile picture path
+	    	$profilePic = UserDetail::where('userid', $userName)->pluck('profilePicPath');
+			$value['path'] = $profilePic;	
+		}
+
 		return $message;
 	}
 

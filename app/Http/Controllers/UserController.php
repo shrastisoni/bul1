@@ -220,8 +220,6 @@ class UserController extends Controller {
     	return view('user.reviews')->withUser($user);
 	}
 	
-	
-	
 	/**
 	 * Display a loggedin user's business ourFeeds.
 	 *

@@ -15,6 +15,9 @@
 						<a href="/business/{{$business->userName}}/reviews" @if(end($sections) == 'reviews') class="active" @endif>Reviews</a>
 					</li>
 					<li>
+						<a href="/business/{{$business->userName}}/messages" @if(end($sections) == 'messages') class="active" @endif>Messages</a>
+					</li>
+					<li>
 						<a href="/business/{{$business->userName}}/our-feed" @if(end($sections) == 'our-feed') class="active" @endif>Our Feed</a>
 					</li>
 				</ul>

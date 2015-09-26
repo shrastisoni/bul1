@@ -31,7 +31,7 @@
 				@else
 				<span>Username:</span> {{$business->name}}
 				<br>
-				<span>Location:</span> Perth, WA
+				<span>Location:</span> {{$business->location}}
 				<br>
 				<!--        <span>Servicing:</span> Australia Wide<br>
 				<span>Phone:</span> 0400 000 000<br>
@@ -46,7 +46,7 @@
 				</div>
 				-->
 				<div class="edit-page">
-					<button type="button" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
+					<button type="button" onclick="window.location = '/profileEdit';" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
 					</button>
 				</div>
 				@endif

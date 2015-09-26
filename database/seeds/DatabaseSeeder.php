@@ -70,6 +70,73 @@ class UserTableSeeder extends Seeder
     			]
 			);
         }
+        for ($i=101; $i <= 103; $i++) 
+        {  
+            DB::table('users')->insert(
+                [
+                'userName' => 'user'.($i - 100),  
+                'email' => 'useremail'.($i - 100).'@horsify.com',  
+                'password' => bcrypt('password'),  
+                'state' => 'active',
+                'roleId' => 1,
+                'passwordEpochUpdatedAt' => time(),
+                'created_at' => time(),
+                'updated_at' => time()
+                ]
+            );
+            DB::table('businesses')->insert(
+    			[
+    			'name' => 'Bisiness '.($i - 100),
+    			'type' => $faker->catchPhrase,
+    			'about' => 'We are '.$faker->company.' '.$faker->companySuffix.'. We\'re working '.$faker->bs.'.',
+    			'phone' => $faker->phoneNumber,
+    			'website' => $faker->domainName,
+    			'serviceCoverage' => 'Servicing '.($i - 100),
+    			'created_at' => time(),
+    			'updated_at' => time()
+    			]
+			); 
+			DB::table('userDetails')->insert(
+    			[
+    			'userId' => $i,
+    			'name' => 'User '.($i - 100),
+    			'location' => $faker->streetAddress,
+    			'profilePicPath' => '/images/bg-logo.png',
+    			'coverPicPath' => '/images/bg.jpg',
+    			'about' => Faker\Provider\Lorem::sentence($nbWords = 30),
+    			'type' => Faker\Provider\Lorem::sentence($nbWords = 2),
+    			'businessId' => $i
+    			]
+			);
+        }
+        for ($i=104; $i <= 150; $i++) 
+        {  
+            DB::table('users')->insert(
+                [
+                'userName' => 'user'.($i - 100),  
+                'email' => 'useremail'.($i - 100).'@horsify.com',  
+                'password' => bcrypt('password'),  
+                'state' => 'active',
+                'roleId' => 1,
+                'passwordEpochUpdatedAt' => time(),
+                'created_at' => time(),
+                'updated_at' => time()
+                ]
+            );
+            
+			DB::table('userDetails')->insert(
+    			[
+    			'userId' => $i,
+    			'name' => 'User '.($i - 100),
+    			'location' => $faker->streetAddress,
+    			'profilePicPath' => '/images/bg-logo.png',
+    			'coverPicPath' => '/images/bg.jpg',
+    			'about' => Faker\Provider\Lorem::sentence($nbWords = 30),
+    			'type' => Faker\Provider\Lorem::sentence($nbWords = 2),
+    			'businessId' => 0
+    			]
+			);
+        }
         DB::table('photoAlbums')->insert(
     			[
     			'user_id' => 1, 

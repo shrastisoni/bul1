@@ -63,6 +63,29 @@ class HomeController extends Controller {
 		}
     	return view('home.profile')->withBusiness($business);
 	}
+
+
+	/**
+	 * Display a loggedin user's business profile.
+	 *
+	 * @return Response
+	 */
+	public function profileEdit()
+	{
+		$user = User::find(Auth::user()->id);
+		$userDetail = UserDetail::where('userId', $user->id)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
+		}
+		else 
+		{
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+		}
+    	return view('home.profileEdit')->withBusiness($business);
+	}
+
 	
 	/**
 	 * Display a loggedin user's business albums.

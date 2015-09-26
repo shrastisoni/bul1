@@ -30,22 +30,18 @@
 			<h2 class="content-heading"><img src="/images/icons/settings.png" class="icon">Settings</h2>
 			<div class="business-details business-info-settings">
 				<h3 class="content-sub-heading">Business Details <span class="edit-settings pull-right"><a href="#">Edit</a></span></h3>
-				<span class="line-of-text"><span>Business Name:</span> Gray Filly</span>
-				<span class="line-of-text"><span>Business Type:</span> Farming &amp; Agriculture</span>
+				<span class="line-of-text"><span>Business Name:</span> {{$business->name}}</span>
+				<span class="line-of-text"><span>Business Type:</span> {{$business->type}}</span>
 				<span class="line-of-text"><span>Membership Level:</span> Basic <span class="upgrade-membership pull-right"><a href="#">Upgrade to Premium. Try it for Free. <img src="/images/icons/right-arrow-color.png"></a></span></span>
 			</div>
 			<div class="business-contact business-info-settings">
 				<h3 class="content-sub-heading">Business Contact <span class="edit-settings pull-right"><a href="#">Edit</a></span></h3>
-				<span class="line-of-text"><span>Main Contact:</span> Job Bloggs</span>
-				<span class="line-of-text"><span>Email Address:</span> <a href="mailto:name@horsify.com">name@horsify.com</a></span>
-				<span class="line-of-text"><span class="address">Address:</span> <span>1 Sample St
-						<br>
-						Sampletown WA1600
-						<br>
-						Australia</span></span>
+				<span class="line-of-text"><span>Main Contact:</span> {{$business->name}}</span>
+				<span class="line-of-text"><span>Email Address:</span> <a href="mailto:{{$business->email}}">{{$business->email}}</a></span>
+				<span class="line-of-text"><span class="address">Address:</span> <span>{{$business->location}}</span><br/>
 				<span class="line-of-text"><span>Phone:</span>
 					<tel>
-						0410 000 000
+						{{$business->phone}}
 					</tel></span>
 			</div>
 			<div class="password business-info-settings">

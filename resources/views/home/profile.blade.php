@@ -25,7 +25,7 @@
 					<img src="/images/icons/review.png" class="stars"><span class="rating">4.5</span> 15 Reviews
 				</div>
 				<div class="edit-page">
-					<button type="button" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
+					<button type="button" onclick="window.location = '/profileEdit';" class="btn btn-default edit-this-page"><img src="/images/icons/edit-white.png" class="icon">Edit this page
 					</button>
 				</div>
 				@else

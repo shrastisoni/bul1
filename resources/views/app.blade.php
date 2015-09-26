@@ -55,12 +55,18 @@
 						<li>
 							<a href="search.html"><i class="fa fa-search"></i></a>
 						</li>
+						@if(Auth::check())
+						<li>
+							<a href="/auth/logout">Logout</a>
+						</li>
+						@else
 						<li>
 							<a href="/auth/login">Log in</a>
 						</li>
 						<li>
 							<a href="/auth/register">Join now</a>
 						</li>
+						@endif
 					</ul>
 				</div>
 			</div>

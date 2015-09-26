@@ -22,9 +22,8 @@ class CreateUsersTable extends Migration {
 			$table->enum('roleId', array( 1, 2, 3));
 			$table->rememberToken();
 			$table->integer('passwordEpochUpdatedAt');
-			$table->integer('epochCreatedAt');
-			$table->integer('epochUpdatedAt');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

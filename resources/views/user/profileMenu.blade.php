@@ -11,11 +11,9 @@
 				<a href="/user/{{$user->userName}}/connections" @if(end($sections) == 'connections') class="active" @endif>Connections</a>
 			</li>
 			<li>
-				<a href="/user/{{$user->userName}}/messages" @if(end($sections) == 'messages') class="active" @endif>Messages</a>
+				<a href="/user/{{$user->userName}}/reviews" @if(end($sections) == 'reviews') class="active" @endif>Reviews</a>
 			</li>
-			<li>
-				<a href="/user/{{$user->userName}}/settings" @if(end($sections) == 'settings') class="active" @endif>Settings</a>
-			</li>
+			
 			<li>
 				<a href="/user/{{$user->userName}}/our-feed" @if(end($sections) == 'our-feed') class="active" @endif>My Feed</a>
 			</li>

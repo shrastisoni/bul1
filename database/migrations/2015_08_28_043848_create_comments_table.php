@@ -21,9 +21,8 @@ class CreateCommentsTable extends Migration {
 			$table->integer('onQuestionId');
 			$table->integer('likesCount');
 			$table->string('hashId', 60);
-			$table->integer('epochCreatedAt');
-			$table->integer('epochUpdatedAt');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

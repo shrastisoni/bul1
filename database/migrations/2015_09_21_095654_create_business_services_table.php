@@ -18,7 +18,8 @@ class CreateBusinessServicesTable extends Migration {
 			$table->integer('businessId')->unsigned();
 			$table->foreign('businessId')->references('id')->on('businesses');
 			$table->integer('serviceId');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

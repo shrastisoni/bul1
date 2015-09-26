@@ -19,9 +19,8 @@ class CreatePackagesTable extends Migration {
 			$table->string('name', 50);
 			$table->float('price');
 			$table->boolean('active');
-			$table->integer('epochCreatedAt');
-			$table->integer('epochUpdatedAt');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

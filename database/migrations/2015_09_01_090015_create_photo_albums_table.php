@@ -23,9 +23,8 @@ class CreatePhotoAlbumsTable extends Migration {
 			$table->integer('linkWith'); //if type 'album' then 'link with n photos' else if type is 'photo' then link with album id n
 			$table->boolean('active');
 			$table->string('about', 500);
-			$table->integer('epochCreatedAt');
-			$table->integer('epochUpdatedAt');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

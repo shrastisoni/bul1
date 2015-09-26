@@ -1,4 +1,4 @@
-@extends('business.header')
+@extends('home.header')
 
 @section('content')
 

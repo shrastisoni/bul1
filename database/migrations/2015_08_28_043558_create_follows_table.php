@@ -21,9 +21,8 @@ class CreateFollowsTable extends Migration {
 			$table->string('toType', 50);
 			$table->integer('typeId');
 			$table->boolean('permit');
-			$table->integer('epochCreatedAt');
-			$table->integer('epochUpdatedAt');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

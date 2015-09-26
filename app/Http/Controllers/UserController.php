@@ -220,28 +220,6 @@ class UserController extends Controller {
     	return view('user.reviews')->withUser($user);
 	}
 	
-	/**
-	 * Display a loggedin user's business messages.
-	 *
-	 * @return Response
-	 */
-	public function messages($id)
-	{
-		//all users
-		$user = User::where('userName', $id)->first();
-		if(empty($user))
-		{
-			return redirect()->back();
-		}
-		$userDetail = UserDetail::where('userId', $user->id)->first();
-		$business = Business::find($userDetail->businessId);
-		if(!empty($business))
-		{
-			return redirect('/business/'.$user->userName.'/profile');
-		}
-		$user = (object) array_merge($user->toArray(), $userDetail->toArray());
-    	return view('user.messages')->withUser($user);
-	}
 	
 	
 	/**

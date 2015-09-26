@@ -9,15 +9,15 @@
 		<!-- Sidebar Column -->
 		<div class="col-md-3 sidebar">
 			<div class="page-meta">
-				<span>Contact:</span> Gray Filly <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a>
+				<span>Contact:</span> <span>{{$business->name}} <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a></span>
 				<br>
-				<span>Location:</span> Perth, WA <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a>
+				<span>Location:</span> <span>{{$business->location}} <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a></span>
 				<br>
-				<span>Servicing:</span> Australia Wide <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a>
+				<span>Servicing:</span> <span>{{$business->serviceCoverage}} <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a></span>
 				<br>
-				<span>Phone:</span> 0400 000 000 <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a>
+				<span>Phone:</span> <span>{{$business->phone}} <a href="#"><img src="/images/icons/edit-2.png" class="edit-profile"></a><span>
 				<br>
-				<span>Web:</span><a href="http://www.gary-filly.com" target="_blank">www.gary-filly.com</a><a href="#"><img src="images/icons/edit-2.png" class="edit-profile"></a>
+				<span>Web:</span><a href="{{$business->website}}" target="_blank">{{$business->website}}</a><a href="#"><img src="images/icons/edit-2.png" class="edit-profile"></a>
 				<span></span><img src="images/icons/facebook.png" class="social-icon"><img src="/images/icons/twitter.png" class="social-icon"><img src="images/icons/google-plus.png" class="social-icon"><a href="#"><img src="images/icons/edit-2.png" class="edit-profile"></a>
 				<div class="clearfix spacer2x"></div>
 				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">2,122 Followers</span>
@@ -25,7 +25,7 @@
 					<img src="/images/icons/review.png" class="stars"><span class="rating">4.5</span> 12 Reviews
 				</div>
 				<div class="edit-page">
-					<button type="button" class="btn btn-default edit-this-page green"><img src="/images/icons/save.png" class="icon">Save Changes When Done
+					<button type="button" onclick="window.location = '/profile';" class="btn btn-default edit-this-page green"><img src="/images/icons/save.png" class="icon">Save Changes When Done
 					</button>
 				</div>
 			</div>

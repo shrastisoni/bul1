@@ -21,9 +21,8 @@ class CreateBusinessesTable extends Migration {
 			$table->string('phone', 15);
 			$table->string('website', 200);
 			$table->string('serviceCoverage', 500);
-			$table->integer('epochCreatedAt');
-			$table->integer('epochUpdatedAt');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

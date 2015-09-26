@@ -23,7 +23,8 @@ class CreateUserDetailsTable extends Migration {
 			$table->string('about', 1000);
 			$table->string('type', 255);
 			$table->integer('businessId');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 			$table->primary('userId');
 		});
 	}

@@ -19,9 +19,8 @@ class CreateUsermetasTable extends Migration {
 			$table->foreign('userId')->references('id')->on('users');
 			$table->string('metaKey', 200);
 			$table->string('metaValue', 250);
-			$table->integer('epochCreatedAt');
-			$table->integer('epochUpdatedAt');
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 	}
 

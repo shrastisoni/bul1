@@ -18,13 +18,7 @@ class BusinessController extends Controller
 	 */
 	public function index()
 	{
-		$businesses = Business::all();
-		foreach ($businesses as $key => $business) 
-		{
-			$business->userDetail = UserDetail::where('businessId', $business->id)->first();
-			$business->user = User::find($business->userDetail->userId);
-		}
-		return view('business.search')->withBusinesses($businesses);
+		return redirect('/search');
 	}
 
 	/**
@@ -136,30 +130,6 @@ class BusinessController extends Controller
 		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
     	return view('business.reviews')->withBusiness($business);
 	}
-	
-	/**
-	 * Display a loggedin user's business messages.
-	 *
-	 * @return Response
-	 */
-	public function messages($id)
-	{
-		//all users
-		$user = User::where('userName', $id)->first();
-		if(empty($user))
-		{
-			return redirect()->back();
-		}
-		$userDetail = UserDetail::where('userId', $user->id)->first();
-		$business = Business::find($userDetail->businessId);
-		if(empty($business))
-		{
-			return redirect('/user/'.$user->userName.'/profile');
-		}
-		$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
-    	return view('business.messages')->withBusiness($business);
-	}
-	
 	
 	/**
 	 * Display a loggedin user's business ourFeeds.

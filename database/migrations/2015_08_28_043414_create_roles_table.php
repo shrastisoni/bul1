@@ -17,7 +17,8 @@ class CreateRolesTable extends Migration {
 			$table->increments('id');
 			$table->integer('roleId');
 			$table->string('value', 50);
-			$table->timestamps();
+			$table->integer('created_at');
+			$table->integer('updated_at');
 		});
 		
 		// Insert some stuff

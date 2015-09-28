@@ -86,6 +86,41 @@ class HomeController extends Controller {
     	return view('home.profileEdit')->withBusiness($business);
 	}
 
+	public function profileDataSave(Request $request)
+	{
+		$userId = Auth::User()->id;
+		$returnValue = false;
+		$userData = $request->all();
+		$userDetail = UserDetail::where('userId', $userId)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			DB::table('userDetails')->where('userId', $userId)->update(['name' => $userData['name'], 'location' => $userData['location'], 'about' => $userData['about'], 'updated_at' => time()]);
+		}
+		else 
+		{
+			$business->name = $userData['name'];
+			$business->about = $userData['about'];
+			$business->phone = $userData['phone'];
+			$business->website = $userData['website'];
+			$business->serviceCoverage = $userData['serviceCoverage'];
+			$business->updated_at = time();
+			$business->save();
+			DB::table('userDetails')->where('userId', $userId)->update(['location' => $userData['location'], 'updated_at' => time()]);
+		}
+		$userDetail = UserDetail::where('userId', $userId)->first();
+		$business = Business::find($userDetail->businessId);
+		if(empty($business))
+		{
+			$business = array_merge($userDetail->toArray());
+		}
+		else 
+		{
+			$business = array_merge($userDetail->toArray(), $business->toArray());
+		}
+    	return $business;
+	}
+
 	
 	/**
 	 * Display a loggedin user's business albums.

@@ -1866,6 +1866,18 @@ footer {
 	color: #dadada;
 	font-size: 13px;
 }
+.profileEditDisableInput
+{
+	border : none !important;
+	background-color: white !important;
+	margin : 0px 0px !important;
+}
+.profileEditEnableInput
+{
+	border: 1px solid #eaeaea !important;
+	background-color: white !important;
+	margin : 0px 0px !important;
+}
 
 /* Responsive Styles */
 

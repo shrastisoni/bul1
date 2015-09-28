@@ -42,6 +42,7 @@ Route::get('business/{id}/our-feed', ['as' => 'ourFeed', 'uses' => 'BusinessCont
 Route::get('home', 'HomeController@index');
 Route::get('profile', ['middleware' => 'auth', 'uses' => 'HomeController@profile']);
 Route::get('profileEdit', ['middleware' => 'auth', 'uses' => 'HomeController@profileEdit']);
+Route::get('profileDataSave', ['middleware' => 'auth', 'uses' => 'HomeController@profileDataSave']);
 Route::get('photos', ['middleware' => 'auth', 'uses' => 'HomeController@photos']);
 Route::get('connections', ['middleware' => 'auth', 'uses' => 'HomeController@connections']);
 Route::get('reviews', ['middleware' => 'auth', 'uses' => 'HomeController@reviews']);

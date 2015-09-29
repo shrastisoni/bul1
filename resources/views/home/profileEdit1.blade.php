@@ -106,14 +106,29 @@
 			@if($business->businessId)
 				<span ng-init="edit.name.value='{{$business->name}}';edit.name.disabled='true';edit.name.classStyle = 'profileEditDisableInput'">Contact:</span> <input style="width: 136px" ng-class="edit.name.classStyle" ng-disabled="edit.name.disabled" type="text" ng-model="edit.name.value"/> <a ng-click="makeEditableFunc(edit.name)" data-toggle="modal" data-target="#myModal" ><img src="/images/icons/edit-2.png" class="edit-profile"></a>
 				<br>
-				<span ng-init="edit.location.value='{{$business->location}}';edit.location.disabled='true';edit.location.classStyle = 'profileEditDisableInput'">Location:</span> <input style="width: 136px" ng-class="edit.location.classStyle" ng-disabled="edit.location.disabled" type="text" ng-model="edit.location.value"/><a ng-click="makeEditableFunc(edit.location)" data-toggle="modal" data-target="#myModal" ><img src="/images/icons/edit-2.png" class="edit-profile"></a>
+				<span ng-init="edit.location.value='{{$business->location}}';edit.name.disabled='true';edit.location.classStyle = 'profileEditDisableInput'">Location:</span> <input style="width: 136px" ng-class="edit.location.classStyle" ng-disabled="edit.name.disabled" type="text" ng-model="edit.location.value"/>
 				<br>
-				<span ng-init="edit.serviceCoverage.value='{{$business->serviceCoverage}}';edit.serviceCoverage.disabled='true';edit.serviceCoverage.classStyle = 'profileEditDisableInput'">Servicing:</span> <input style="width: 136px" ng-class="edit.serviceCoverage.classStyle" ng-disabled="edit.serviceCoverage.disabled" type="text" ng-model="edit.serviceCoverage.value"/><a ng-click="makeEditableFunc(edit.serviceCoverage)" data-toggle="modal" data-target="#myModal" ><img src="/images/icons/edit-2.png" class="edit-profile"></a>
+				<span ng-init="edit.serviceCoverage.value='{{$business->serviceCoverage}}';edit.name.disabled='true';edit.serviceCoverage.classStyle = 'profileEditDisableInput'">Servicing:</span> <input style="width: 136px" ng-class="edit.serviceCoverage.classStyle" ng-disabled="edit.name.disabled" type="text" ng-model="edit.serviceCoverage.value"/>
 				<br>
-				<span ng-init="edit.phone.value='{{$business->phone}}';edit.phone.disabled='true';edit.phone.classStyle = 'profileEditDisableInput'">Phone:</span> <input style="width: 136px" ng-class="edit.phone.classStyle" ng-disabled="edit.phone.disabled" type="text" ng-model="edit.phone.value"/><a ng-click="makeEditableFunc(edit.phone)" data-toggle="modal" data-target="#myModal" ><img src="/images/icons/edit-2.png" class="edit-profile"></a>
+				<span ng-init="edit.phone.value='{{$business->phone}}';edit.name.disabled='true';edit.phone.classStyle = 'profileEditDisableInput'">Phone:</span> <input style="width: 136px" ng-class="edit.phone.classStyle" ng-disabled="edit.name.disabled" type="text" ng-model="edit.phone.value"/>
 				<br>
-				<span ng-init="edit.website.value='{{$business->website}}';edit.website.disabled='true';edit.website.classStyle = 'profileEditDisableInput'">Web:</span><input style="width: 136px" ng-class="edit.website.classStyle" ng-disabled="edit.website.disabled" type="text" ng-model="edit.website.value"/><a ng-click="makeEditableFunc(edit.website)" data-toggle="modal" data-target="#myModal" ><img src="/images/icons/edit-2.png" class="edit-profile"></a>
-				<span></span><img src="images/icons/facebook.png" class="social-icon"><img src="/images/icons/twitter.png" class="social-icon"><img src="images/icons/google-plus.png" class="social-icon"><a href="#">
+				<span ng-init="edit.website.value='{{$business->website}}';edit.name.disabled='true';edit.website.classStyle = 'profileEditDisableInput'">Web:</span><input style="width: 136px" ng-class="edit.website.classStyle" ng-disabled="edit.name.disabled" type="text" ng-model="edit.website.value"/>
+				<span ng-hide="edit.social">
+					<img src="images/icons/facebook.png" class="social-icon">
+					<img src="/images/icons/twitter.png" class="social-icon">
+					<img src="images/icons/google-plus.png" class="social-icon">
+				</span>
+				<div ng-hide="!edit.social">
+					<span>
+						<img src="images/icons/facebook.png" class="social-icon"><input style="width: 136px" type="text"  />
+					</span>
+					<span>
+						<img src="/images/icons/twitter.png" class="social-icon"><input style="width: 136px" type="text"  />
+					</span>
+					<span>
+						<img src="images/icons/google-plus.png" class="social-icon"><input style="width: 136px" type="text"  />
+					</span>
+				</div>
 				<div class="clearfix spacer2x"></div>
 				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">2,122 Followers</span>
 				<div class="reviews">
@@ -477,11 +492,29 @@
 	            .controller('profileUpdateController', function($scope, $http) {
 
 	            	$scope.makeEditableFunc = function(inputId) {
-	            		inputId.disabled = !(inputId.disabled);
+	            		$scope.edit.name.disabled = !($scope.edit.name.disabled);
+	            		$scope.edit.serviceCoverage.disabled = !($scope.edit.serviceCoverage.disabled);
+	            		$scope.edit.location.disabled = !($scope.edit.location.disabled);
+	            		$scope.edit.phone.disabled = !($scope.edit.phone.disabled);
+	            		$scope.edit.website.disabled = !($scope.edit.website.disabled);
+	            		$scope.edit.social = !$scope.edit.social;
 				        if (inputId.disabled)
-				            inputId.classStyle = "profileEditDisableInput";
+				        {
+				        	$scope.edit.name.classStyle = "profileEditDisableInput";
+				        	$scope.edit.serviceCoverage.classStyle = "profileEditDisableInput";
+				        	$scope.edit.location.classStyle = "profileEditDisableInput";
+				        	$scope.edit.phone.classStyle = "profileEditDisableInput";
+				        	$scope.edit.website.classStyle = "profileEditDisableInput";
+				        }
 				        else
-				            inputId.classStyle = "profileEditEnableInput";
+				        {
+				        	$scope.edit.name.classStyle = "profileEditEnableInput";
+				        	$scope.edit.serviceCoverage.classStyle = "profileEditEnableInput";
+				        	$scope.edit.location.classStyle = "profileEditEnableInput";
+				        	$scope.edit.phone.classStyle = "profileEditEnableInput";
+				        	$scope.edit.website.classStyle = "profileEditEnableInput";
+				            
+				        }
 	            	};
 
 	            	$scope.chooseImage = function(imageId) {

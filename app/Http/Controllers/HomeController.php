@@ -75,6 +75,7 @@ class HomeController extends Controller {
 		$user = User::find(Auth::user()->id);
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
+
 		if(empty($business))
 		{
 			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
@@ -83,41 +84,11 @@ class HomeController extends Controller {
 		{
 			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
 		}
+
     	return view('home.profileEdit')->withBusiness($business);
 	}
 
-	public function profileEdit1()
-	{
-		$user = User::find(Auth::user()->id);
-		$userDetail = UserDetail::where('userId', $user->id)->first();
-		$business = Business::find($userDetail->businessId);
-		if(empty($business))
-		{
-			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
-		}
-		else 
-		{
-			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
-		}
-    	return view('home.profileEdit1')->withBusiness($business);
-	}
-
-	public function profileEdit2()
-	{
-		$user = User::find(Auth::user()->id);
-		$userDetail = UserDetail::where('userId', $user->id)->first();
-		$business = Business::find($userDetail->businessId);
-		if(empty($business))
-		{
-			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
-		}
-		else 
-		{
-			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
-		}
-    	return view('home.profileEdit2')->withBusiness($business);
-	}
-
+	
 	public function profileDataSave(Request $request)
 	{
 		$userId = Auth::User()->id;
@@ -142,6 +113,7 @@ class HomeController extends Controller {
 		}
 		$userDetail = UserDetail::where('userId', $userId)->first();
 		$business = Business::find($userDetail->businessId);
+
 		if(empty($business))
 		{
 			$business = array_merge($userDetail->toArray());
@@ -150,10 +122,15 @@ class HomeController extends Controller {
 		{
 			$business = array_merge($userDetail->toArray(), $business->toArray());
 		}
+
     	return $business;
 	}
 
+
+
 	
+	
+
 	/**
 	 * Display a loggedin user's business albums.
 	 *

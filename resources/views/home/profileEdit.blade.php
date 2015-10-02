@@ -24,7 +24,7 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <style type="text/css">
-	input[type="text"], select, input[type="submit"], textarea
+	input[type="text"], select, input[type="submit"],textarea
 	{	
 		border: 1px solid #fff;
 	    height: 38px;
@@ -32,10 +32,18 @@
         background-color: #fff;
 	    margin: 0px;
 	}
+	textarea:Focus{
+
+		    outline: none !important;
+		    border-color: #719ECE;
+		    box-shadow: 0 0 10px #719ECE;
+		    height: 50px;
+	 }
+
 
 	.addBorder
 	{
-		border-color: #268AD5;
+		border-color: #e6e6e6;
 
 	}
 </style>
@@ -104,7 +112,7 @@
     <input style="display:none;" id="profilePic" type="file" accept="image/*" image="profilePic"/>
     <img ng-show="profilePic" height="180px" width="220px" ng-src="<%profilePic.url%>" class="upload-logo"></div>
     <div class="col-lg-9">
-      <h2 class="company-title" ng-bind='businessContact1'></h2>
+      <h2 class="company-title" ng-bind='businessContact1' ></h2>
       <h4 class="company-type">@if($business->businessId) Business Type: {{$business->type}} @else {{$business->type}} @endif</h4>
       <button type="button" class="btn btn-default green"><img src="images/icons/chat.png" class="icon">Contact us</button><button type="button" class="btn btn-default blue"><img src="images/icons/double-right-arrow.png" class="icon">Follow</button>
     </div>
@@ -187,7 +195,7 @@
 		                            <label for="inputPassword"><img src="images/icons/google-plus.png" class="social-icon"></label>
 		                            <input style="margin: 0 !important" type="text" class="form-control" ng-model="businessGoogle" placeholder="google +...">
 		                        </div>
-	                        	<!-- <button type="submit" ng-click='updateProfileData()' class="btn btn-primary">Send</button> -->
+	                        	<button type="submit"  data-dismiss="modal" class="btn btn-primary">Submit</button> 
 	                    	</form>
                       	</div>
                     </div>
@@ -215,17 +223,17 @@
 				<span class="bookmark"><img src="/images/icons/double-right-arrow-color.png" class="icon">2,122 Following</span>
 				@endif
 				<div class="edit-page">
-					<button type="button" ng-click="updateProfileData()" class="btn btn-default edit-this-page green"><img src="/images/icons/save.png" class="icon">Save Changes When Done
+					<button type="button" ng-click="updateProfileData();" class="btn btn-default edit-this-page green"><img src="/images/icons/save.png" class="icon">Save Changes When Done
 					</button>
 				</div>
 			</div>
 		</div>
 		<!-- Content Column -->
-		<div class="col-md-9 content" ng-init="editable=true" >
-			<h2 class="content-heading"><img src="/images/icons/file-2.png" class="icon about-us">About Us <a ng-click="editable = !editable"><img src="images/icons/edit-2.png" class="edit-profile" style="cursor: pointer;"></a></h2>
-			<p>
-				<textarea style="resize:none;width: 885px; height: 165px;" ng-disabled='editable' ng-model="aboutUs" ng-class="{addBorder: true === !editable}"></textarea>
-			</p>
+		<div class="col-md-9 content" ng-init="editable=true;" >
+			<h2 class="content-heading"><img src="/images/icons/file-2.png"  class="icon about-us">About Us <a ng-click="editable = !editable;focusInput=true"><img src="images/icons/edit-2.png" class="edit-profile" style="cursor: pointer;"></a></h2>
+			
+				<textarea focus-me="focusInput" style="resize:none;width: 885px; height: 165px;" ng-disabled='editable' ng-model="aboutUs"  ng-class="{addBorder: true === !editable }"></textarea>
+			
 			<h2 class="content-heading"><img src="/images/icons/services.png" class="icon services">Services <a href="#"><img src="images/icons/edit-2.png" class="edit-profile"></a></h2>
 			<ul class="fa-ul">
 				<li>
@@ -504,13 +512,15 @@
 		<script src="/js/jquery.js"></script>
 		<script src="/js/angular.min.js" type="text/javascript"></script>
 	    <script type="text/javascript">
-	          angular.module('profileUpdate', ['imageupload'], function($interpolateProvider, $compileProvider) {
+	          var app = angular.module('profileUpdate', ['imageupload'], function($interpolateProvider, $compileProvider) {
 	               $interpolateProvider.startSymbol('<%');
 	               $interpolateProvider.endSymbol('%>');
-	           })
-	            .controller('profileUpdateController', function($scope, $http) {
+	           });
 
-	            	$scope.init = function () {
+	           app.controller('profileUpdateController', function($scope, $http) 
+	           {
+                     $scope.init = function () 
+                     {
 	            		$scope.businessContact = '{{$business->name}}';
 	            		$scope.businessLocation = '{{$business->location}}';
 		            	$scope.businessServicing = '{{$business->serviceCoverage}}';
@@ -520,7 +530,7 @@
 		            	$scope.businessTwitter = 'www.twitter.com';
 		            	$scope.businessFacebook = 'www.facebook.com';
 		            	$scope.aboutUs = '{{$business->about}}';
-
+                        $scope.someFocusVariable = true; 
 		            	//not for edit only to display
 
 		            	$scope.businessContact1 = '{{$business->name}}';
@@ -534,20 +544,15 @@
 	            	$scope.init();
 						            	
 
-
-	            	
-
-	            	/*$scope.chooseImage = function(imageId) {
-	            		$('#'+imageId).click();
-					};*/
-
-	                $scope.single = function() {
+	                $scope.single = function() 
+	                {
 	                	var profilePic = $scope.profilePic;
 	                	var coverPic = $scope.coverPic;
 	                    var formData = new FormData();
 	                    formData.append('profilePic', profilePic, profilePic.name);
 	                    formData.append('coverPic', coverPic, coverPic.name);
-	                    var data = {
+	                    var data = 
+	                    {
 							profilePic: $scope.profilePic,
 							coverPic: $scope.coverPic
 						};
@@ -556,13 +561,15 @@
 						    method: "POST",
 						    params: data
 						 })
-						.success(function(response) {
+						.success(function(response) 
+						{
 							console.log(response);
 						});
 	                };
 
 	                $scope.updateProfileData = function(){
 	                	
+
 	                	@if($business->businessId)
 
 	                	var data = 
@@ -578,7 +585,8 @@
 	                	@else
 
 	                	
-	                	var data = {
+	                	var data = 
+	                	{
 	                		name : $scope.businessContact,
 	                		location : $scope.businessLocation,
 	                		about : $scope.aboutUs
@@ -591,12 +599,36 @@
 						    method: "GET",
 						    params: data
 						 })
-						.success(function(response) {
+						.success(function(response) 
+						{
+							$scope.businessContact1 = response.name;
+	                		$scope.businessLocation1 = response.location;
+	                		$scope.aboutUs1 = response.about;
+	                		$scope.businessServicing1 = response.serviceCoverage;
+	                		$scope.businessPhone1 = response.phone;
 							$('#myModal').modal('hide');	
 						});
 				    };
-	            });
+                
+    	});          
+       angular.module('profileUpdate').directive('focusMe', function($timeout) {
+								  return {
+								    scope: { trigger: '=focusMe' },
+								    link: function(scope, element) {
+								      scope.$watch('trigger', function(value) {
+								        if(value === true) { 
+								            element[0].focus();
+								            scope.trigger = false;
+	
+								        }
+								      });
+								    }
+								  };
+							});
+
+
 	    </script>
+	   
 	    <script src="/js/imageupload.js" type="text/javascript"></script>
 		
 		<script src="/js/bootstrap.min.js"></script>

@@ -130,7 +130,7 @@
 			@if($business->businessId)
 				<span >Contact:</span> 
 				<input style="width: 136px" ng-disabled="disabled" type="text" ng-model="businessContact1"/> 
-				<a data-toggle="modal" data-target="#myModal" ><img src="/images/icons/edit-2.png" class="edit-profile" style="cursor: pointer;"></a>
+				<a data-toggle="modal" data-target="#myModal" ng-click="toggleImage1()" ><img src="<%followBtnImgUrl1%>" class="edit-profile" style="cursor: pointer;"></a>
 				<br>
 				<span >Location:</span> 
 				<input style="width: 136px" ng-disabled="disabled" type="text" ng-model="businessLocation1"/>
@@ -195,7 +195,7 @@
 		                            <label for="inputPassword"><img src="images/icons/google-plus.png" class="social-icon"></label>
 		                            <input style="margin: 0 !important" type="text" class="form-control" ng-model="businessGoogle" placeholder="google +...">
 		                        </div>
-	                        	<button type="submit"  data-dismiss="modal" class="btn btn-primary">Submit</button> 
+	                        	<button type="submit" ng-click="toggleImage1()"  data-dismiss="modal" class="btn btn-primary">Submit</button> 
 	                    	</form>
                       	</div>
                     </div>
@@ -230,8 +230,7 @@
 		</div>
 		<!-- Content Column -->
 		<div class="col-md-9 content" ng-init="editable=true;" >
-			<h2 class="content-heading"><img src="/images/icons/file-2.png"  class="icon about-us">About Us <a ng-click="editable = !editable;focusInput=true"><img src="images/icons/edit-2.png" class="edit-profile" style="cursor: pointer;"></a></h2>
-			
+			<h2 class="content-heading"><img src="/images/icons/file-2.png"  class="icon about-us">About Us <a ng-click="editable = !editable;focusInput=true;toggleImage()"><img ng-src="<%followBtnImgUrl%>" ng-model = "followBtnImgUrl" class="edit-profile" style="cursor: pointer;"></a></h2>
 				<textarea focus-me="focusInput" style="resize:none;width: 885px; height: 165px;" ng-disabled='editable' ng-model="aboutUs"  ng-class="{addBorder: true === !editable }"></textarea>
 			
 			<h2 class="content-heading"><img src="/images/icons/services.png" class="icon services">Services <a href="#"><img src="images/icons/edit-2.png" class="edit-profile"></a></h2>
@@ -518,7 +517,8 @@
 	           });
 
 	           app.controller('profileUpdateController', function($scope, $http) 
-	           {
+	           {     
+	           	     
                      $scope.init = function () 
                      {
 	            		$scope.businessContact = '{{$business->name}}';
@@ -538,7 +538,8 @@
 		            	$scope.businessServicing1 = '{{$business->serviceCoverage}}';
 		            	$scope.businessPhone1 = '{{$business->phone}}';
 		            	$scope.businessLink1 = '{{$business->website}}';
-
+                                $scope.followBtnImgUrl = 'images/icons/edit-2.png';
+                                  $scope.followBtnImgUrl1 = 'images/icons/edit-2.png';
 	            	};
 
 	            	$scope.init();
@@ -610,6 +611,26 @@
 						});
 				    };
                 
+
+                      
+                      $scope.toggleImage = function () {
+                      	
+				        if ($scope.followBtnImgUrl === 'images/icons/edit-2.png') {
+				            $scope.followBtnImgUrl = 'images/icons/edit-2-enabled.png';
+				        } else {
+				            $scope.followBtnImgUrl = 'images/icons/edit-2.png';
+				        }
+				    }
+
+				    $scope.toggleImage1 = function () {
+                      	
+				        if ($scope.followBtnImgUrl1 === 'images/icons/edit-2.png') {
+				            $scope.followBtnImgUrl1 = 'images/icons/edit-2-enabled.png';
+				        } else {
+				            $scope.followBtnImgUrl1 = 'images/icons/edit-2.png';
+				        }
+				    }
+
     	});          
        angular.module('profileUpdate').directive('focusMe', function($timeout) {
 								  return {

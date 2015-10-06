@@ -20,11 +20,16 @@
 		<link rel="stylesheet" href="/css/bootstrap.css">
 
 		<!-- Custom CSS -->
+		
 		<link href="/css/style.css" rel="stylesheet">
 		<!-- CSS for vertical Tabs -->
+		
 		<link rel="stylesheet" href="/css/bootstrap.vertical-tabs.css">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:300,500' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
 	</head>
 
 	<body>
@@ -132,16 +137,16 @@
 
 		<!-- jQuery -->
 		<script src="/js/jquery.js"></script>
-		<!--<script src="js/enscroll-0.6.1.min.js"></script> <!-- Scroll bar styling -->
-		<!-- Bootstrap Core JavaScript -->
+		<script src="/js/angular.min.js"></script>
+		<script src="/js/controllers/homeController.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
-		<!--<script>
-		$('.tabs-left').enscroll({
-		showOnHover: true,
-		verticalTrackClass: 'track3',
-		verticalHandleClass: 'handle3'
-		});
-		</script>
-		-->
+		<script src="/js/dropzone.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-sanitize.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>	
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script> <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="external/jquery/jquery.js"></script>
+		<script src="external/jquery/jquery-ui.js"></script>
+		<script src="/js/jquery.emoji.js"></script>
 	</body>
 </html>
+	

@@ -7,8 +7,10 @@ use App\UserDetail;
 use App\MessageReceipient;
 use Auth;
 use DB;
+use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller {
 
@@ -42,7 +44,7 @@ class HomeController extends Controller {
 	{
 		return view('home');
 	}
-	
+
 	/**
 	 * Display a loggedin user's business profile.
 	 *
@@ -75,7 +77,6 @@ class HomeController extends Controller {
 		$user = User::find(Auth::user()->id);
 		$userDetail = UserDetail::where('userId', $user->id)->first();
 		$business = Business::find($userDetail->businessId);
-
 		if(empty($business))
 		{
 			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
@@ -84,7 +85,6 @@ class HomeController extends Controller {
 		{
 			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
 		}
-
     	return view('home.profileEdit')->withBusiness($business);
 	}
 
@@ -113,7 +113,6 @@ class HomeController extends Controller {
 		}
 		$userDetail = UserDetail::where('userId', $userId)->first();
 		$business = Business::find($userDetail->businessId);
-
 		if(empty($business))
 		{
 			$business = array_merge($userDetail->toArray());
@@ -122,15 +121,11 @@ class HomeController extends Controller {
 		{
 			$business = array_merge($userDetail->toArray(), $business->toArray());
 		}
-
     	return $business;
 	}
 
-
-
 	
 	
-
 	/**
 	 * Display a loggedin user's business albums.
 	 *
@@ -286,25 +281,12 @@ class HomeController extends Controller {
 		return  $messageReceipientId ;
 	}
 
+
 	/**
-	 * get all unread message
+	 * get all read/unread message
 	 *
 	 * @return Response
 	 */
-	
-
-
-	/**
-	 * get all unread message
-	 *
-	 * @return Response
-	 */
-	public function getUnreadMessage(Request $request)
-	{
-		//fetching all unread message 
-	    $messageMeta = MessageReceipient::all();
-	    return $messageMeta;
-	}
 
 	/**
 	 * get all read/unread message
@@ -334,25 +316,126 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function composeMessage(Request $request)
+	{
+		
+		$result = $request->all();
+		$arrayTo = explode(",", $result['to']);
+		
+		foreach ($arrayTo as $value) 
+		{
+			$data = array(
+		        'name' => "Learning Laravel",
+		    );
+			
+			$subject = $result['subject'];
+			$messageText = $result['message'];
+
+			Mail::send('home.file', $data, function ($message) use ($value, $subject, $messageText)
+		    {
+		        $message->from(Auth::user()->email, $messageText);
+		        $message->to($value)->subject($subject);
+		    });
+
+			//insert different data for messade meta table
+			$messageMetaId = DB::table('message_meta')->insertGetId(
+						array(
+						    'subject' => $subject,
+						    'archived_status' => 'true',
+						    )
+						);
+			
+			//insert different data for message content table
+			$messageContentId = DB::table('message_content')->insertGetId(
+						array(
+						    'meta_Id' => $messageMetaId, 
+						    'subject' => $subject,
+						    'message' => $messageText,
+						    'from' => Auth::user()->email,
+						    'created_at' => time(),
+						    'updated_at' => time(),
+						    'notification_status' => 12
+						    )
+						);
+
+			//insert different data for message receipient table
+			$messageReceipientId = DB::table('message_receipient')->insertGetId(
+						array(
+						    'meta_Id' => $messageMetaId, 
+						    'receipient_ID' => $value,
+						    'notification_status' => "1",
+						    )
+						);
+		}
+		
+		return $messageMetaId;
+	}
+
+	/**
+	 * get all read/unread message
+	 *
+	 * @return Response
+	 */
 	public function getUserMessage(Request $request)
 	{
-
 		$result = $request->all();
-
-		//from user 
 		$fromUser = $result['user'];
+		$userName = Message::where('id', $fromUser)->pluck('from');
 		
+		// $fromUser = 'useremail3@horsify.com';
 		//logged in user
 		$userId = Auth::user()->email;
+		//SELECT mc.message,mc.from,mc.subject,mc.created_at,mr.receipient_ID FROM message_content as mc JOIN message_receipient as mr ON mc.meta_Id = mc.meta_Id WHERE mr.receipient_ID = "useremail2@horsify.com" and mc.from ="useremail3@horsify.com" group by message_receipient.meta_Id 
+
+            $message1 = DB::table('message_content')
+            ->select('message_content.message', 'message_content.created_at', 'message_content.subject', 'message_receipient.receipient_ID', 'message_content.from')
+            ->join('message_receipient', 'message_receipient.meta_Id', '=', 'message_content.meta_Id')
+			->where('message_receipient.receipient_ID', $userId)
+			->where('message_content.from', $userName)
+            ->get();
+	//print_r($message1);
+       /* $message2 = DB::table('message_content')
+            ->join('message_receipient', 'message_receipient.meta_Id', '=', 'message_content.meta_Id')
+            ->where('message_content.from', $userId)
+			->select('message_content.message', 'message_content.created_at', 'message_content.subject', 'message_receipient.receipient_ID', 'message_content.from')
+            ->get();*/
+            $message2 = DB::table('message_content')
+            ->select('message_content.message', 'message_content.created_at', 'message_content.subject', 'message_receipient.receipient_ID', 'message_content.from')
+            ->join('message_receipient', 'message_receipient.meta_Id', '=', 'message_content.meta_Id')
+            ->where('message_receipient.receipient_ID', $userName )
+			->where('message_content.from' , $userId)
+			->get();            
+      //      print_r($message2);
+
+		$allMessage = array();
+		$i = 0;
+
+		/*array_push($message1, $message2);*/
+		foreach ($message1 as $key => $value) 
+		{
+			$allMessage[$i]['message'] = $value->message;
+			$allMessage[$i]['created_at'] = $value->created_at;
+			$allMessage[$i]['receipient'] = $value->receipient_ID;
+			$allMessage[$i]['subject'] = $value->subject;
+			$allMessage[$i]['from'] = $value->from;
+			$i++;
+		}
+
+		foreach ($message2 as $key => $value) 
+		{
+			$allMessage[$i]['message'] = $value->message;
+			$allMessage[$i]['created_at'] = $value->created_at;
+			$allMessage[$i]['receipient'] = $value->receipient_ID;
+			$allMessage[$i]['subject'] = $value->subject;
+			$allMessage[$i]['from'] = $value->from;
+			$i++;
+		}
 		
-		$message1 = Message::all();
-		foreach ($message1 as $key => $value) {
-	    	
-	    	//getting profile pic path
-	    	$email = $value['from'];
+		foreach ($allMessage as $key => $value) {
+			$email = $value['from'];
 			$userName = User::where('email', $email)->pluck('id');
 			$profilePic = UserDetail::where('userid', $userName)->pluck('profilePicPath');
-			$value['path'] = $profilePic;	
+			$value['path'] = $profilePic;
 
 			//checking data to display user name
 	    	if($value['from'] == $userId)
@@ -363,16 +446,11 @@ class HomeController extends Controller {
 	    	{
 	    		$value['from'] = UserDetail::where('userid', $userName)->pluck('name');
 	    	}
-
-	    	//changing date to epoch time to display in front end
-			if(isset($value['created_at']))
-	    	{
-	    		$epoch = strtotime($value['created_at']);	
-				$value['epoch'] = $epoch;
-	    	}
-		}
-		return $message1;
+	    }
+		return $allMessage;
 	}
+       
+
 
 	/**
 	 * get all read/unread message
@@ -383,7 +461,10 @@ class HomeController extends Controller {
 	{
 		//fetching all the receipient ids 
 		$userId = Auth::user()->email;
+		
 		$message = MessageReceipient::where('receipient_ID', $userId)->get();
+
+		
 		$metaIds = array();
 
 		//fetching meta ids and storing in the array
@@ -391,6 +472,8 @@ class HomeController extends Controller {
 		{
 			$metaIds[] = $value['meta_Id'];
 		}
+
+		
 
 		//getting all the message corresponding to a user
 		$message = Message::whereIn('meta_Id', $metaIds)->groupBy('from')->get();
@@ -445,6 +528,14 @@ class HomeController extends Controller {
 			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
 		}
     	return view('home.our-feed')->withBusiness($business);
+	}
+
+	public function autoLoadAllUsers(Request $request)
+	{
+		$user = User::select('email')
+			->get();
+		
+		return $user;
 	}
 
 }

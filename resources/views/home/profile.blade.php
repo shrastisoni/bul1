@@ -10,13 +10,13 @@
 		<div class="col-md-3 sidebar">
 			<div class="page-meta">
 				@if($business->businessId)
-				<span>Contact:</span> <span>{{$business->name}}</span>
+				<span>Contact:</span> {{$business->name}}
 				<br>
-				<span>Location:</span> <span>{{$business->location}}</span>
+				<span>Location:</span> {{$business->location}}
 				<br>
-				<span>Servicing:</span> <span>{{$business->serviceCoverage}}</span>
+				<span>Servicing:</span> {{$business->serviceCoverage}}
 				<br>
-				<span>Phone:</span> <span>{{$business->phone}}</span>
+				<span>Phone:</span> {{$business->phone}}
 				<br>
 				<span>Web:</span><a href="{{$business->website}}" target="_blank">{{$business->website}}</a><span></span><img src="/images/icons/facebook.png" class="social-icon"><img src="/images/icons/twitter.png" class="social-icon"><img src="/images/icons/google-plus.png" class="social-icon">
 				<div class="clearfix spacer2x"></div>

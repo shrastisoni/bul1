@@ -80,7 +80,7 @@ return [
 	|
 	*/
 
-	'username' => env('MAIL_USERNAME'),
+	'username' => 'postmaster@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
 	|
 	*/
 
-	'password' => env('MAIL_PASSWORD'),
+	'password' => 'd65c7974c37fbece9db4d48c1c2bf6cb',
 
 	/*
 	|--------------------------------------------------------------------------

@@ -327,7 +327,7 @@ class HomeController extends Controller {
 		$value = "";
 		Mail::send('home', $data, function ($message) use ($value, $subject, $messageText)
 	    {
-	        $message->from("postmaster@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
+	        $message->from("horsify@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
 	        $message->to('ankur.tiwari@gyrix.co')->subject($subject);
 	    });
 
@@ -356,7 +356,7 @@ class HomeController extends Controller {
 
 			Mail::send('home', $data, function ($message) use ($value, $subject, $messageText)
 		    {
-		        $message->from("postmaster@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
+		        $message->from("horsify@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
 		        $message->to($value)->subject($subject);
 		    });
 

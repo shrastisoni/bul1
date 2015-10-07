@@ -325,7 +325,7 @@ class HomeController extends Controller {
 		$subject = 'Reciveing Message from';
 		$messageText = "test";
 		$value = "";
-		Mail::send('home.file', $data, function ($message) use ($value, $subject, $messageText)
+		Mail::send('home', $data, function ($message) use ($value, $subject, $messageText)
 	    {
 	        $message->from("postmaster@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
 	        $message->to('ankur.tiwari@gyrix.co')->subject($subject);
@@ -354,7 +354,7 @@ class HomeController extends Controller {
 			$subject = $result['subject'];
 			$messageText = $result['message'];
 
-			Mail::send('home.file', $data, function ($message) use ($value, $subject, $messageText)
+			Mail::send('home', $data, function ($message) use ($value, $subject, $messageText)
 		    {
 		        $message->from("postmaster@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
 		        $message->to($value)->subject($subject);

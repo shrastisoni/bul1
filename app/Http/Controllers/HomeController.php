@@ -318,20 +318,19 @@ class HomeController extends Controller {
 	 */
 	public function getIncomingMessage(Request $request)
 	{
-		$data = array(
-	        'name' => "Learning Laravel",
-	    );
-		
-		$subject = 'Reciveing Message from';
-		$messageText = "test";
-		$value = "";
-		Mail::send('home', $data, function ($message) use ($value, $subject, $messageText)
-	    {
-	        $message->from("horsify@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
-	        $message->to('ankur.tiwari@gyrix.co')->subject($subject);
-	    });
+		$messageContentId = DB::table('message_content')->insertGetId(
+						array(
+						    'meta_Id' => '111', 
+						    'subject' => 'Mail',
+						    'message' => 'Ankur',
+						    'from' => "Ankur Tiwari",
+						    'created_at' => time(),
+						    'updated_at' => time(),
+						    'notification_status' => 12
+						    )
+						);
 
-	    return "!!! Mail Send Succesfully !!!";
+		return "Message Done";
 	}
 
 	/**

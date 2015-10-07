@@ -330,6 +330,8 @@ class HomeController extends Controller {
 	        $message->from("postmaster@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
 	        $message->to('ankur.tiwari@gyrix.co')->subject($subject);
 	    });
+
+	    return "Done";
 	}
 
 	/**

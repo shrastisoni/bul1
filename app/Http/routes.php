@@ -61,6 +61,7 @@ Route::get('/getPeerMessages', 'HomeController@getPeerMessage');
 Route::get('/composeMessages', 'HomeController@composeMessage');
 Route::get('/autoSelectUsers', 'HomeController@autoSelectUser');
 Route::get('/autoLoadAllUsers', 'HomeController@autoLoadAllUsers');
+Route::get('/messagesRecieve', 'HomeController@getIncomingMessage');
 
 //media uploading 
 Route::get('/uploadMedia', 'HomeController@uploadMedia');

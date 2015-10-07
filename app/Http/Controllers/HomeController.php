@@ -316,6 +316,17 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function getIncomingMessage(Request $request)
+	{
+		$result = $request->all();
+		return $result;
+	}
+
+	/**
+	 * get all read/unread message
+	 *
+	 * @return Response
+	 */
 	public function composeMessage(Request $request)
 	{
 		
@@ -333,7 +344,7 @@ class HomeController extends Controller {
 
 			Mail::send('home.file', $data, function ($message) use ($value, $subject, $messageText)
 		    {
-		        $message->from(Auth::user()->email, $messageText);
+		        $message->from("postmaster@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
 		        $message->to($value)->subject($subject);
 		    });
 

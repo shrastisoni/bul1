@@ -46,23 +46,18 @@ Route::get('profileDataSave', ['middleware' => 'auth', 'uses' => 'HomeController
 Route::get('photos', ['middleware' => 'auth', 'uses' => 'HomeController@photos']);
 Route::get('connections', ['middleware' => 'auth', 'uses' => 'HomeController@connections']);
 Route::get('reviews', ['middleware' => 'auth', 'uses' => 'HomeController@reviews']);
-Route::get('messages', ['middleware' => 'auth', 'uses' => 'HomeController@messages']);
+/*Route::get('messages', ['middleware' => 'auth', 'uses' => 'HomeController@messages']);
+*/
 Route::get('settings', ['middleware' => 'auth', 'uses' => 'HomeController@settings']);
 Route::get('our-feed', ['middleware' => 'auth', 'uses' => 'HomeController@ourFeed']);
-
-
-//for messaging system
-Route::get('/getUnreadMessage', 'HomeController@getUnreadMessage');
-Route::get('/getAllMessage', 'HomeController@getAllMessage');
-Route::get('/sentMessages', 'HomeController@sentMessage');
-Route::get('/getShortDescriptions', 'HomeController@getShortDescription');
-Route::get('/getUserMessage', 'HomeController@getUserMessage');
-Route::get('/getPeerMessages', 'HomeController@getPeerMessage');
-Route::get('/composeMessages', 'HomeController@composeMessage');
-Route::get('/autoSelectUsers', 'HomeController@autoSelectUser');
-Route::get('/autoLoadAllUsers', 'HomeController@autoLoadAllUsers');
-Route::get('/messagesRecieve', 'HomeController@getIncomingMessage');
-
-//media uploading 
-Route::get('/uploadMedia', 'HomeController@uploadMedia');
+	
 //routes for loggedin user home end
+
+//message routes
+Route::get('/messages', ['middleware' => 'auth', 'uses' => 'MessageController@index']);
+Route::get('/getUserMessage', ['middleware' => 'auth', 'uses' => 'MessageController@getMessage']);
+Route::get('/createMessage', ['middleware' => 'auth', 'uses' => 'MessageController@createMessage']);
+Route::get('/autoLoadAllUsers', ['middleware' => 'auth', 'uses' => 'MessageController@emailAutoSuggest']);
+Route::post('/messagesRecieve', 'MessageController@getIncomingMessage');
+Route::get('/getShortDescriptions', 'MessageController@getShortDescription');
+Route::get('simple', 'MessageController@simple');

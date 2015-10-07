@@ -241,7 +241,8 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function sentMessage(Request $request)
+	
+	/*public function sentMessage(Request $request)
 	{
 		//all users
 		$result = array();
@@ -279,7 +280,7 @@ class HomeController extends Controller {
 					);
 
 		return  $messageReceipientId ;
-	}
+	}*/
 
 
 	/**
@@ -341,56 +342,7 @@ class HomeController extends Controller {
 	public function composeMessage(Request $request)
 	{
 		
-		$result = $request->all();
-		$arrayTo = explode(",", $result['to']);
 		
-		foreach ($arrayTo as $value) 
-		{
-			$data = array(
-		        'name' => "Learning Laravel",
-		    );
-			
-			$subject = $result['subject'];
-			$messageText = $result['message'];
-
-			Mail::send('home', $data, function ($message) use ($value, $subject, $messageText)
-		    {
-		        $message->from("horsify@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
-		        $message->to($value)->subject($subject);
-		    });
-
-			//insert different data for messade meta table
-			$messageMetaId = DB::table('message_meta')->insertGetId(
-						array(
-						    'subject' => $subject,
-						    'archived_status' => 'true',
-						    )
-						);
-			
-			//insert different data for message content table
-			$messageContentId = DB::table('message_content')->insertGetId(
-						array(
-						    'meta_Id' => $messageMetaId, 
-						    'subject' => $subject,
-						    'message' => $messageText,
-						    'from' => Auth::user()->email,
-						    'created_at' => time(),
-						    'updated_at' => time(),
-						    'notification_status' => 12
-						    )
-						);
-
-			//insert different data for message receipient table
-			$messageReceipientId = DB::table('message_receipient')->insertGetId(
-						array(
-						    'meta_Id' => $messageMetaId, 
-						    'receipient_ID' => $value,
-						    'notification_status' => "1",
-						    )
-						);
-		}
-		
-		return $messageMetaId;
 	}
 
 	/**
@@ -479,55 +431,7 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getShortDescription(Request $request)
-	{
-		//fetching all the receipient ids 
-		$userId = Auth::user()->email;
-		
-		$message = MessageReceipient::where('receipient_ID', $userId)->get();
-
-		
-		$metaIds = array();
-
-		//fetching meta ids and storing in the array
-		foreach ($message as $key => $value) 
-		{
-			$metaIds[] = $value['meta_Id'];
-		}
-
-		
-
-		//getting all the message corresponding to a user
-		$message = Message::whereIn('meta_Id', $metaIds)->groupBy('from')->get();
-		foreach ($message  as $key => $value) {
-
-			//fetching user id on the basis of email
-			$email = $value['from'];
-			$userName = User::where('email', $email)->pluck('id');
-
-			//converting time into epoch value
-			$epoch = strtotime($value['created_at']);	
-			$value['epoch'] = $epoch;
-
-			//user name on the basis of email
-			if($value['from'] == $userId)
-	    	{
-	    		//if message is sending by logged in user set "me"
-	    		$value['from'] = "Me";	
-	    	}
-	    	else
-	    	{
-	    		//if message is sending by other email address then set user name instead of email id
-	    		$value['from'] = UserDetail::where('userid', $userName)->pluck('name');
-	    	}
-
-	    	//getting user profile picture path
-	    	$profilePic = UserDetail::where('userid', $userName)->pluck('profilePicPath');
-			$value['path'] = $profilePic;	
-		}
-
-		return $message;
-	}
+	
 
 
 	/**
@@ -554,9 +458,7 @@ class HomeController extends Controller {
 
 	public function autoLoadAllUsers(Request $request)
 	{
-		$user = User::select('email')
-			->get();
-		
+		$user = User::select('email')->get();
 		return $user;
 	}
 

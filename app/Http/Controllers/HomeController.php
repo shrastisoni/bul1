@@ -331,7 +331,7 @@ class HomeController extends Controller {
 	        $message->to('ankur.tiwari@gyrix.co')->subject($subject);
 	    });
 
-	    return "Done";
+	    return "Mail Send Succesfully !!!";
 	}
 
 	/**

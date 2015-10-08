@@ -99,7 +99,7 @@ app.controller('messageCtrl', ['$scope', '$http', '$compile', '$sce', '$timeout'
 						message: $scope.compose.message,
 					};
 		$http({
-		    url: "/composeMessages", 
+		    url: "/createMessage", 
 		    method: "GET",
 		    params: data
 	    })

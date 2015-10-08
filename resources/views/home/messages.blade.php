@@ -1,7 +1,7 @@
 @extends('home.header')
 @section('content')
 <div class="container" ng-app="messagePage">
-
+		
 	<!-- Content Row -->
 
 	<div class="row"  ng-controller="messageCtrl">

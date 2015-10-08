@@ -36,7 +36,15 @@ class MessageController extends Controller
      */
     public function simple()
     {
+        //insert different data for messade meta table
+        $messageMetaId = DB::table('message_meta')->insertGetId(
+                    array(
+                        'subject' => "Hello",
+                        'archived_status' => 'true',
+                        )
+                    );
         return view('simple');
+
     }
     /**
      * To handle all the mesaging functionality
@@ -103,7 +111,7 @@ class MessageController extends Controller
             $subject = $result['subject'];
             $messageText = $result['message'];
 
-            Mail::send('home', $data, function ($message) use ($value, $subject, $messageText) {
+            Mail::send('simple', $data, function ($message) use ($value, $subject, $messageText) {
                 $message->from("horsify@sandbox87296eeb27a6460c8427f09fe54cc53f.mailgun.org", $messageText);
                 $message->to($value)->subject($subject);
             });

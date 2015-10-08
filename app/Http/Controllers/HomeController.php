@@ -4,6 +4,7 @@ use App\Message;
 use App\PhotoAlbum;
 use App\User;
 use App\UserDetail;
+use App\UserMeta;
 use App\MessageReceipient;
 use Auth;
 use DB;
@@ -74,52 +75,137 @@ class HomeController extends Controller {
 	 */
 	public function profileEdit()
 	{
-		$user = User::find(Auth::user()->id);
-		$userDetail = UserDetail::where('userId', $user->id)->first();
-		$business = Business::find($userDetail->businessId);
+		$user               = User::find(Auth::user()->id);
+		$userDetail         = UserDetail::where('userId', $user->id)->first();
+		$business           = Business::find($userDetail->businessId);
+		$userMetaId         = UserMeta::all()->where('userId', $user->id);
+		$arr =array();
+		$phone = array();
+        foreach ($userMetaId as $key => $value) 
+        { 
+        	 
+        	 if($value['metaKey'] == 'phone')
+        	 {
+               $phone[$value['metaKey']][] = $value['metaValue'];
+        	 }
+        	 if($value['metaKey'] == 'urlFacebook' || $value['metaKey'] == 'urlGoogle' || $value['metaKey'] == 'urlTwitter')
+              $arr[$value['metaKey']] = $value['metaValue'];
+        	  $arr = array_merge($arr,$phone);
+        }
+        // return $arr;
+  //       echo "<pre>";
+		// print_r($arr);
 		if(empty($business))
 		{
 			$business = (object) array_merge($user->toArray(), $userDetail->toArray());
 		}
 		else 
 		{
-			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray());
+			$business = (object) array_merge($user->toArray(), $userDetail->toArray(), $business->toArray(), $arr);
 		}
-    	return view('home.profileEdit')->withBusiness($business);
+
+
+		// echo "<pre>";
+		// print_r($business);
+		return view('home.profileEdit')->withBusiness($business);
 	}
 
 	
 	public function profileDataSave(Request $request)
 	{
-		$userId = Auth::User()->id;
-		$returnValue = false;
-		$userData = $request->all();
-		$userDetail = UserDetail::where('userId', $userId)->first();
-		$business = Business::find($userDetail->businessId);
+
+		$userId                    = Auth::User()->id;
+		$returnValue               = false;
+		$userData                  = $request->all();
+		$userDetail                = UserDetail::where('userId', $userId)->first();
+		$phone      = $userData ['phone'];
+		$phone1 = json_decode($phone);
+		$userMetaId =UserMeta::all()->where('userId', $userId);
+ 		$business = Business::find($userDetail->businessId);
 		if(empty($business))
 		{
 			DB::table('userDetails')->where('userId', $userId)->update(['name' => $userData['name'], 'location' => $userData['location'], 'about' => $userData['about'], 'updated_at' => time()]);
+		    
 		}
 		else 
 		{
-			$business->name = $userData['name'];
-			$business->about = $userData['about'];
-			$business->phone = $userData['phone'];
-			$business->website = $userData['website'];
-			$business->serviceCoverage = $userData['serviceCoverage'];
-			$business->updated_at = time();
+			$business->name              = $userData['name'];
+			$business->about             = $userData['about'];
+			$business->website           = $userData['website'];
+			$business->serviceCoverage   = $userData['serviceCoverage'];		    
+			$business->updated_at        = time();
 			$business->save();
+            DB::table('usersMeta')->where('userId', $userId)->delete();
+			// Array to insert values in database
+			$arrayInsert =array();
+            foreach ($phone1 as $key => $value)
+            {
+            	if(!empty($value))
+            	{
+            		$new = array('userId' => $userId,'metaKey' => 'phone','metaValue' => $value);
+            		array_push($arrayInsert,$new);
+            	}
+            }
+
+            
+            if(!empty($userData['urlFacebook']))
+            {
+               $new =array('userId' => $userId,'metaKey' => 'urlFacebook','metaValue' => $userData['urlFacebook']);
+               array_push($arrayInsert,$new);
+
+            }
+             if(!empty($userData['urlGoogle']))
+            {
+               $new =array('userId' => $userId,'metaKey' => 'urlGoogle','metaValue' => $userData['urlGoogle']);
+               array_push($arrayInsert,$new);
+
+            }
+             if(!empty($userData['urlTwitter']))
+            {
+               $new =array('userId' => $userId,'metaKey' => 'urlTwitter','metaValue' => $userData['urlTwitter']);
+               array_push($arrayInsert,$new);
+
+            }
+             
+            DB::table('usersMeta')->insert($arrayInsert);
 			DB::table('userDetails')->where('userId', $userId)->update(['location' => $userData['location'], 'updated_at' => time()]);
 		}
 		$userDetail = UserDetail::where('userId', $userId)->first();
 		$business = Business::find($userDetail->businessId);
+        $userMetaId =UserMeta::all()->where('userId', $userId);
+        $arr =array();
+        $arr =array();
+		$phone = array();
+		$phoneBlank =array();
+        foreach ($userMetaId as $key => $value) 
+        { 
+        	 
+        	 if($value['metaKey'] == 'phone')
+        	 {
+               $phone[$value['metaKey']][] = $value['metaValue'];
+        	 }
+        	 if($value['metaKey'] == 'urlFacebook' || $value['metaKey'] == 'urlGoogle' || $value['metaKey'] == 'urlTwitter')
+             {
+             	$arr[$value['metaKey']] = $value['metaValue'];
+             } 
+             if(is_array($phone))
+			 {
+				$arr = array_merge($arr,$phone);	
+			 }
+			 else
+			 {
+			 	$arr = array_merge($arr,$phoneBlank);
+			 }
+        	  
+        }
+       // return $arr;
 		if(empty($business))
 		{
 			$business = array_merge($userDetail->toArray());
 		}
 		else 
 		{
-			$business = array_merge($userDetail->toArray(), $business->toArray());
+			$business = array_merge($userDetail->toArray(), $business->toArray() ,$arr);
 		}
     	return $business;
 	}

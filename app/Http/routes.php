@@ -61,4 +61,4 @@ Route::get('/createMessage', ['middleware' => 'auth', 'uses' => 'MessageControll
 Route::get('/autoLoadAllUsers', ['middleware' => 'auth', 'uses' => 'MessageController@emailAutoSuggest']);
 Route::post('/messagesRecieve', 'MessageController@getIncomingMessage');
 Route::get('/getShortDescriptions', 'MessageController@getShortDescription');
-Route::post('simple', 'MessageController@simple');
+Route::get('simple', 'MessageController@simple');

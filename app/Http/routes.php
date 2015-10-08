@@ -16,6 +16,7 @@ Route::get('search', 'BusinessController@search');
 Route::post('follow', 'FollowController@followIt');
 Route::resource('users', 'UserController');
 Route::resource('questions', 'QuestionController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
@@ -60,4 +61,4 @@ Route::get('/createMessage', ['middleware' => 'auth', 'uses' => 'MessageControll
 Route::get('/autoLoadAllUsers', ['middleware' => 'auth', 'uses' => 'MessageController@emailAutoSuggest']);
 Route::post('/messagesRecieve', 'MessageController@getIncomingMessage');
 Route::get('/getShortDescriptions', 'MessageController@getShortDescription');
-Route::get('simple', 'MessageController@simple');
+Route::post('simple', 'MessageController@simple');
